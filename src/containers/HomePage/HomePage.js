@@ -1,15 +1,12 @@
 import React from 'react';
-import Navbar from '../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
-  return (
-    <div>
-      <Navbar />
-      <main>
-        <h1>Welcome to the IMDB Clone</h1>
-      </main>
-    </div>
-  );
-}
+    return (
+        <div className="home-page">
+            <Footer />
+        </div>
+    );
+};
 
 export default HomePage;
