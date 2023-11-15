@@ -1,0 +1,42 @@
+[
+  {
+    "id": "movie1",
+    "title": "Movie Title 1",
+    "poster": "facebook-icon.png",
+    "trailer": "link/to/trailer1",
+    "detailLink": "/movies/movie1",
+    "genre": ["Action", "Adventure"]
+  },
+  {
+    "id": "movie2",
+    "title": "Movie Title 2",
+    "poster": "facebook-icon.png",
+    "trailer": "link/to/trailer2",
+    "detailLink": "/movies/movie2",
+    "genre": ["Comedy", "Adventure"]
+  },
+  {
+    "id": "movie3",
+    "title": "Movie Title 3",
+    "poster": "facebook-icon.png",
+    "trailer": "link/to/trailer3",
+    "detailLink": "/movies/movie3",
+    "genre": ["Action", "Comedy"]
+  },
+  {
+    "id": "movie4",
+    "title": "Movie Title 4",
+    "poster": "facebook-icon.png",
+    "trailer": "link/to/trailer4",
+    "detailLink": "/movies/movie4",
+    "genre": ["Action", "Adventure"]
+  },
+  {
+    "id": "movie5",
+    "title": "Movie Title 5",
+    "poster": "facebook-icon.png",
+    "trailer": "link/to/trailer5",
+    "detailLink": "/movies/movie5",
+    "genre": ["Action", "Comedy"]
+  }
+]

@@ -1,49 +1,49 @@
 .footer {
-  background-color: #000; /* IMDb footer background */
-  color: #fff; /* Color for the text */
-  padding: 20px; /* Padding around the footer */
-  text-align: center; /* Center align the content */
+  background-color: #000;
+  color: #fff; 
+  padding: 20px; 
+  text-align: center;
 }
 
 .footer-content {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center align the items */
+  flex-direction: column;
+  align-items: center;
 }
 
 .social-icons {
-  margin-bottom: 20px; /* Space between icons and the next row */
+  margin-bottom: 20px;
 }
 
 .social-icons a {
-  margin: 0 10px; /* Margin between icons */
+  margin: 0 10px;
 }
 
 .social-icons img {
-  width: 24px; /* Adjust as necessary for size */
-  height: auto; /* Maintain aspect ratio */
+  width: 24px; 
+  height: auto; 
   background-color: #fff;
-  border-radius: 50%; /* Make the images circular */
+  border-radius: 50%;
 }
 
 .footer-links {
-  margin-bottom: 20px; /* Space between links and the copyright row */
+  margin-bottom: 20px;
 }
 
 .footer-links a {
-  color: #fff; /* White text for links */
-  margin: 0 10px; /* Space between links */
-  text-decoration: none; /* No underline */
-  font-size: 14px; /* Match IMDb font size */
+  color: #fff; 
+  margin: 0 10px; 
+  text-decoration: none; 
+  font-size: 14px; 
 }
 
 .footer-links a:hover {
-  text-decoration: underline; /* Underline on hover for visual feedback */
+  text-decoration: underline; 
 }
 
 .footer-bottom-text {
-  font-size: 12px; /* Smaller font size for copyright text */
-  border-top: 1px solid #333; /* Border top like IMDb's */
-  padding-top: 10px; /* Padding top for space */
-  width: 100%; /* Full width */
+  font-size: 12px; 
+  border-top: 1px solid #333; 
+  padding-top: 10px;
+  width: 100%; 
 }
