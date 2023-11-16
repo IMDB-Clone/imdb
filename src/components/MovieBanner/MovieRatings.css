@@ -1,0 +1,28 @@
+/* MovieRatings.css */
+.movie-ratings {
+    text-align: center;
+  }
+  
+  .rating-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .rating-star, .popularity-icon {
+    color: #ffc107; /* Gold color for the star and fire icon */
+    margin-right: 0.25rem;
+  }
+  
+  .rating-value, .rating-count, .popularity-value {
+    font-size: 1rem;
+    color: #fff; /* White color for text */
+  }
+  
+  
+  /* Responsive design: Hide MovieRatings on smaller screens */
+  @media (max-width: 767px) {
+    .movie-ratings {
+      display: none;
+    }
+  }
+  

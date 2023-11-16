@@ -1,0 +1,50 @@
+/* RatingButton.css */
+
+.rating-button {
+    color: white;
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+}
+
+.rating-button button {
+    background: none;
+    border: none;
+    color: rgb(87, 153, 239); /* Default color */
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; /* Aligns button content vertically */
+    justify-content: center; /* Centers button content horizontally */
+}
+
+.rate {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.star {
+    
+    color: #555;
+    margin-right: 5px; /* Changed from margin-left to margin-right for spacing after the star */
+}
+
+.rating-count {
+    margin-left: 10px;
+    color: white;
+}
+
+.rating-button button:hover {
+    background-color: #555;
+}
+
+/* Apply the blue color when the rating-button has the 'rated' class */
+.rating-button.rated .star {
+    color: rgb(87, 153, 239); /* This color will apply when the button is in 'rated' state */
+}
+
+

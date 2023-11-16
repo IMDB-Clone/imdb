@@ -1,23 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import TermsAndConditions from './containers/TermsAndConditions/TermsAndConditions';
-import PrivacyPolicy from './containers/PrivacyPolicy/PrivacyPolicy';
-import HomePage from './containers/HomePage/HomePage';
-// import MovieDetailsPage from './containers/MoviesDetails/MoviesDetails';
-// import MovieDetails from './containers/MovieDetails/MovieDetails';
+import MovieBanner from './components/MovieBanner/MovieBanner';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
+import MovieMedia from './components/MovieMedia/MovieMedia';
+
+
 
 const App = () => {
+    const posterUrl = "path-to-your-poster.jpg";
+    const trailerUrl = "path-to-your-trailer.mp4";
+    const title = "David Fincher";
     return (
-        <Router>
-            <Routes> {/* Wrap all Route components within Routes */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-
-                {/* <Route path="/movies/:id" element={<MovieDetailsPage />} /> */}
-                {/* <Route path="/movie/:id" element={<MovieDetails />} /> */}
-            </Routes>
-        </Router>
+        <>
+            <MovieBanner />
+            <div className="container">
+      <MovieMedia posterUrl={posterUrl} trailerUrl={trailerUrl} title={title} />
+    </div>
+        </> 
     );
 };
 

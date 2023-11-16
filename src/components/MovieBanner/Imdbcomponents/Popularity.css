@@ -1,0 +1,16 @@
+/* Popularity.css */
+.popularity-container {
+  display: flex;
+  align-items: center;
+}
+
+.popularity-icon {
+  width: 20px; /* Set the size of your icon */
+  height: 20px; /* Set the size of your icon */
+  margin-right: 5px;
+}
+
+.popularity-value {
+  color: white; /* Adjust the color as needed */
+  /* Add other styles as needed */
+}
