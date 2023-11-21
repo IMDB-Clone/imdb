@@ -1,0 +1,30 @@
+/* PosterComponent.css */
+.poster-component {
+  width: 278px;
+  height: 414px;
+  overflow: hidden;
+  position: relative;
+}
+
+.poster-component img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+.ribbon-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure it's above other elements */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ribbon-button img {
+  width: 50px; /* Adjust as necessary for your design */
+  height: auto;
+}

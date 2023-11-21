@@ -1,22 +1,19 @@
-import React from 'react';
-import MovieBanner from './components/MovieBanner/MovieBanner';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
-import MovieMedia from './components/MovieMedia/MovieMedia';
-
-
+import React from "react";
+import MovieBanner from "./components/MovieBanner/MovieBanner";
+import MovieComponent from "./containers/MovieMedia/MovieComponent";
+import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
+import GDMC from "./components/MovieGrene-description/GDMC";
 
 const App = () => {
-    const posterUrl = "path-to-your-poster.jpg";
-    const trailerUrl = "path-to-your-trailer.mp4";
-    const title = "David Fincher";
-    return (
-        <>
-            <MovieBanner />
-            <div className="container">
-      <MovieMedia posterUrl={posterUrl} trailerUrl={trailerUrl} title={title} />
-    </div>
-        </> 
-    );
+  // Removed unused variables
+
+  return (
+    <>
+      <MovieBanner />
+      <MovieComponent />
+      <GDMC />
+    </>
+  );
 };
 
 export default App;

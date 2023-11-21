@@ -1,0 +1,40 @@
+/* Add this to your CSS file */
+.movie-credits {
+    background-color: #343a40; /* Dark background */
+    color: #ffffff; /* Text color */
+    font-family: 'Arial', sans-serif;
+    padding-left: 10%;
+      max-width: 100%;
+      max-height: 100%;
+  }
+  
+  .movie-credits h3, .movie-credits p {
+    margin: 0;
+    padding: 4px 0; /* Adjust spacing as needed */
+  }
+  
+  .movie-credits p {
+    color: #bbb; /* Lighter text color for names */
+  }
+  
+  .movie-credits .line {
+    border-top: 1px solid white;
+    height: 1px;
+
+  }
+  
+  .movie-credits a {
+    color: #06b; /* Color for links, adjust as needed */
+    text-decoration: none;
+  }
+  
+  .movie-credits a:hover {
+    text-decoration: underline;
+  }
+  .b{
+    /* want it  to look white color and bold*/
+    color: white;
+    font-weight: bold;
+
+  }
+  

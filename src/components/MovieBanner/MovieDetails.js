@@ -6,7 +6,7 @@ const MovieDetails = ({ movie }) => {
     <div className="col-md-8">
       <h1 className="movie-title">{movie.title}</h1>
       <p className="movie-info">
-        {movie.year} • {movie.rating} • {movie.duration}
+        {movie.year} • {movie.duration} minutes
       </p>
     </div>
   );

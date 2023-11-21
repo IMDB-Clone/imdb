@@ -1,7 +1,7 @@
 // MovieRatings.js
 import React from "react";
 import MovieMedia from "./Imdbcomponents/IMDBrating";
-import RatingModel from "./Imdbcomponents/RatingModel"; // Import the RatingModel
+import RatingModal from './Imdbcomponents/RatingModal';
 import Popularity from "./Imdbcomponents/Popularity";
 import "./MovieRatings.css";
 
@@ -9,18 +9,32 @@ const MovieRatings = ({ movie }) => {
   return (
     <div className="col-md-4 d-none d-md-block">
       <div className="d-flex justify-content-around align-items-center">
-        <div className="text-center">
+        <div className="row">
+          <div className="col-md-4">
           <div className="rating-label">IMDb Rating</div>
-          <MovieMedia movie={movie} />
-        </div>
-        <div className="text-center">
-          <div className="rating-label">Your Rating</div>
-          <RatingModel movie={movie} />{" "}
-          {/* Use the RatingModel component here */}
-        </div>
-        <div className="text-center">
-          <div className="rating-label">Popularity</div>
+          </div>
+            <div className="col-md-4">
+            <div className="rating-label">Your Rating</div>
+            </div>
+            <div className="col-md-4">
+            <div className="rating-label">Popularity</div>
+            </div>
+           
+          <div className="row">
+          <div className="col-md-4">
+          <MovieMedia imdbRating={movie.imdbRating}
+          totalRatings={movie.totalRatings} />
+          </div>
+          <div className="col-md-4">
+          <RatingModal movieTitle={movie.title} />
+
+          </div>
+          <div className="col-md-4">
           <Popularity popularity={movie.popularity} />
+
+          </div>
+          
+        </div>
         </div>
       </div>
     </div>
