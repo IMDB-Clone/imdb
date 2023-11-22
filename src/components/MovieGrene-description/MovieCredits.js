@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { fetchMovieCredits } from '../../services/DetailService'; // Adjust the path as necessary
-import './MovieCredits.css';
+import React, { useState, useEffect } from "react";
+import { fetchMovieCredits } from "../../services/DetailService"; // Adjust the path as necessary
+import "./MovieCredits.css";
 
-const MovieCredits = () => {
+const MovieCredits = ({ movieId })=> {
   const [credits, setCredits] = useState({
-    director: '',
+    director: "",
     writers: [],
-    stars: []
+    stars: [],
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +15,6 @@ const MovieCredits = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const movieId = '507089'; // Example movie ID
         const creditsData = await fetchMovieCredits(movieId);
         setCredits(creditsData);
       } catch (error) {
@@ -26,20 +25,36 @@ const MovieCredits = () => {
     };
 
     fetchData();
-  }, []);
+  }, [movieId]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="movie-credits">
-      <p><span className="b">Director </span>{credits.director}</p>
+      
+      <p>
+        <span className="b">Director </span>
+        {credits.director}
+      </p>
+
       <div className="line"></div>
-      <p> <span className="b">Writer </span> {credits.writers.join(' · ')}</p>
+
+      <p>
+        {" "}
+        <span className="b">Writer </span> {credits.writers.join(" · ")}
+      </p>
+
       <div className="line"></div>
-      <p><span className="b">Stars </span> {credits.stars.join(' · ')}</p>
+
+      <p>
+        <span className="b">Stars </span> {credits.stars.join(" · ")}
+      </p>
+
       <div className="line"></div>
+
       <a href="link_to_IMDbPro">See production info at IMDbPro</a>
+
     </div>
   );
 };

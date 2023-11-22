@@ -4,7 +4,8 @@ import './MovieBanner.css';
 import MovieDetails from './MovieDetails';
 import MovieRatings from './MovieRatings';
 
-const MovieBanner = ( movieId) => {
+const MovieBanner = ({movieId}) => {
+  
 
   const [movie, setMovie] = useState({
     title: '',
@@ -20,7 +21,6 @@ const MovieBanner = ( movieId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const movieId = '507089'; // Example movie ID
         const movieData = await fetchMovieData(movieId);
         setMovie(movieData);
       } catch (error) {
@@ -29,7 +29,7 @@ const MovieBanner = ( movieId) => {
     };
 
     fetchData();
-  }, []);
+  }, [movieId]);
    // The empty array ensures this effect runs only once after the initial render
 
   return (

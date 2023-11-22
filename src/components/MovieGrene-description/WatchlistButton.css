@@ -3,32 +3,39 @@
     background-color: #ffc107; /* Yellow background */
     color: black; /* Black text */
     border: none;
-    padding: 10px;
+    padding: 12px 16px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 200px; /* Adjust as needed */
+    width: 280px; /* Adjust as needed */
+    margin: 0 auto; /* Centers the button */
   }
   
   .watchlist-btn .watchlist-icon {
     /* Adjust these styles as needed */
     margin-right: 10px;
+    width: 20px;
+    height: 20px;
+
   }
   
   .watchlist-btn .user-count {
     font-weight: normal;
     font-size: smaller;
     margin-left: auto; /* Pushes it to the right */
+
   }
   
   .watchlist-btn.in-watchlist {
     background-color: #ffca28; /* Slightly lighter yellow for "in watchlist" state */
+
   }
   
   .watchlist-btn .tick-icon {
     display: none; /* Hidden by default */
+
   }
   
   .watchlist-btn.in-watchlist .tick-icon {

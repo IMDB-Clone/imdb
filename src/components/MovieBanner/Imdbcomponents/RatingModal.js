@@ -8,7 +8,6 @@ import "./RatingModal.css";
 import RatingButton from "./RatingButton";
 
 const RatingModal = ({ movieTitle, movieId }) => {
-  movieId=movieId.movieId;
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [hasRated, setHasRated] = useState(false);

@@ -6,6 +6,7 @@ import Popularity from "./Imdbcomponents/Popularity";
 import "./MovieRatings.css";
 
 const MovieRatings = ({ movie , movieId}) => {
+ 
   return (
     <div className="col-md-4 d-none d-md-block">
       <div className="d-flex justify-content-around align-items-center">

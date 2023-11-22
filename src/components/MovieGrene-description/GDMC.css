@@ -1,4 +1,50 @@
-.GDC{
-    background-color: #343a40; /* Dark background */
-   width: 100%;
+.movie-container {
+    /* Styling for the container */
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .movie-details-col {
+    /* Styling for the left column */
+    color: #fff; /* Example text color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* This will center the content vertically */
+    padding: 1rem;
+
+
+  }
+  .container-fluid.movie-container {
+    margin-left: 3%;
 }
+
+  
+  .movie-credits-row, .movie-genres-row {
+    /* To make sure the credits and genres are on the same line */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* This will wrap the content to the next line if it doesn't fit */
+  }
+  
+  .movie-interaction-col {
+    /* Styling for the right column */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* This will center the content vertically */
+    padding: 1rem;
+  }
+  
+  .movie-interaction-row {
+    /* To make sure the button and counters are centered */
+    text-align: center; /* Center text for smaller elements */
+
+  }
+  
+  .watchlist-btn {
+    background-color: #f5c518; /* Example button color */
+    border: none;
+    color: #000; /* Text color */
+
+  }
+  
+  

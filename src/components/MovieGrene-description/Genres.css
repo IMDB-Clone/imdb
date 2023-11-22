@@ -4,26 +4,25 @@
   background-color: #343a40; /* Dark background */
   color: #ffffff; /* Text color */
   font-family: 'Arial', sans-serif;
-  padding-left: 10%;
-    max-width: 100%;
-    max-height: 100%;
+/*  padding-left: 10%;*/
+  
 }
 
 
 .Genres-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1%; /* Gap between items */
+  gap: 0px; /* Gap between items */
 }
 
 .Genres-item {
   background-color: transparent; /* Transparent background for genre items */
-  padding: 2px 10px; /* Padding inside genre items */
+  padding: 2px 8px; /* Padding inside genre items */
   border-radius: 20px; /* Rounded corners */
   cursor: pointer;
   border: 1px solid #ffffff; /* White border */
-  margin: 10px 10px; /* Vertical margin only */
-  transition: background-color 0.3s;
+  margin: 10px 4px; /* Vertical margin only */
+  transition: background-color 0s ease-in-out; /* Transition effect when hovering */
   color: white;
 }
 
@@ -32,9 +31,9 @@
 }
 
 .Movie-summary {
-  max-width: 100%;
-  margin-top: 0%;
-  padding: 1%;
-  color: #ffffff; /* White text color for the summary */
- 
+  background-color: #343a40; /* Dark background */
+  color: #ffffff; /* Text color */
+  font-family: 'Arial', sans-serif;
+  padding: 10px; /* Adjust to match the exact padding you want */
 }
+

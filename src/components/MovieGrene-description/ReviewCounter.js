@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTotalReviews } from '../../services/DetailService'; // Adjust the import path as needed
 
-const ReviewCounter = () => {
-    const movieId = '507089'; // Example movie ID
+const ReviewCounter = ({movieId}) => {
+
     const [totalReviews, setTotalReviews] = useState(0);
 
 

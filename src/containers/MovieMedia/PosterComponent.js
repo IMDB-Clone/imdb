@@ -45,6 +45,6 @@ function PosterComponent({ posterPath, movieId }) {
       </button>
     </div>
   );
-}
+};
 
 export default PosterComponent;
