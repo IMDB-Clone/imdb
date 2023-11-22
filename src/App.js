@@ -3,15 +3,20 @@ import MovieBanner from "./components/MovieBanner/MovieBanner";
 import MovieComponent from "./containers/MovieMedia/MovieComponent";
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
 import GDMC from "./components/MovieGrene-description/GDMC";
+import ReviewCounter from "./components/MovieGrene-description/ReviewCounter";
+import WatchlistButton from "./components/MovieGrene-description/WatchlistButton";
 
 const App = () => {
-  // Removed unused variables
+  const movieId = 507089;
 
   return (
     <>
-      <MovieBanner />
+      <MovieBanner movieId= {movieId} />
       <MovieComponent />
       <GDMC />
+      <ReviewCounter />
+      <WatchlistButton mediaId={movieId} />
+
     </>
   );
 };

@@ -5,7 +5,7 @@ import RatingModal from './Imdbcomponents/RatingModal';
 import Popularity from "./Imdbcomponents/Popularity";
 import "./MovieRatings.css";
 
-const MovieRatings = ({ movie }) => {
+const MovieRatings = ({ movie , movieId}) => {
   return (
     <div className="col-md-4 d-none d-md-block">
       <div className="d-flex justify-content-around align-items-center">
@@ -26,7 +26,7 @@ const MovieRatings = ({ movie }) => {
           totalRatings={movie.totalRatings} />
           </div>
           <div className="col-md-4">
-          <RatingModal movieTitle={movie.title} />
+          <RatingModal movieTitle={movie.title}  movieId={movieId}/>
 
           </div>
           <div className="col-md-4">

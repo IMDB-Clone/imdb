@@ -13,6 +13,7 @@ const GDMC = () => {
         </div>
         </div>
         < div className="col-sm ">
+          
           </div>
     </div>
   );

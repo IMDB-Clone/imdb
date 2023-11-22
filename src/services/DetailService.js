@@ -2,6 +2,7 @@
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
+const BEARER_TOKEN = process.env.REACT_APP_ACCESS_TOKEN; // Replace with actual token
 
 const fetchOptions = {
   method: 'GET',
@@ -178,52 +179,71 @@ export const fetchMovieData = async (movieId) => {
 
 // DetailService.js
 
+
+// DetailService.js////////////////////////////////////////////
+
 // ... (other imports and constants)
 
-export const fetchRatingStatus = async (movieId) => {
+export const fetchTotalReviews = async (movieId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states`, fetchOptions);
+    const url = `${API_BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`;
+    const response = await fetch(url, fetchOptions);
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+
+    const data = await response.json();
+    return data.total_results; // This will return the total number of reviews
   } catch (error) {
-    console.error("Error fetching rating status:", error);
+    console.error("Error fetching total reviews:", error);
     throw error;
   }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+export const fetchRatingStatus = async (movieId) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    }
+  };
+
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?api_key=${API_KEY}`, options);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
 };
 
 export const updateRating = async (movieId, rating) => {
-  try {
-    const options = {
-      ...fetchOptions,
-      method: 'POST',
-      headers: {
-        ...fetchOptions.headers,
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({ value: rating })
-    };
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    },
+    body: JSON.stringify({ value: rating })
+  };
 
-    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
-    return await response.json();
-  } catch (error) {
-    console.error("Error updating rating:", error);
-    throw error;
-  }
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
 };
 
 export const removeRating = async (movieId) => {
-  try {
-    const options = {
-      ...fetchOptions,
-      method: 'DELETE'
-    };
+  const options = {
+    method: 'DELETE',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    }
+  };
 
-    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
-    return await response.json();
-  } catch (error) {
-    console.error("Error removing rating:", error);
-    throw error;
-  }
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
 };
+

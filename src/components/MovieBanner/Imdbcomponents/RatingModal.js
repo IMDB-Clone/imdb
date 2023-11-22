@@ -7,8 +7,8 @@ import {
 import "./RatingModal.css";
 import RatingButton from "./RatingButton";
 
-const RatingModal = ({ movieTitle }) => {
-  const movieId = "507089"; // Replace with the movie ID
+const RatingModal = ({ movieTitle, movieId }) => {
+  movieId=movieId.movieId;
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [hasRated, setHasRated] = useState(false);
@@ -58,7 +58,6 @@ const RatingModal = ({ movieTitle }) => {
   const handleRemoveRating = async () => {
     setIsLoading(true);
     try {
-      // Call the removeRating function from DetailService
       await removeRating(movieId);
       setRating(0);
       setHasRated(false);
