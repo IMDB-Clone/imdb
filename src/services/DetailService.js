@@ -291,3 +291,25 @@ export const fetchSimilarMovies = async (movieId) => {
     throw error;
   }
 };
+
+// DetailService.js
+const getMovieCast = async (movieId) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    }
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/credits?language=en-US`, options);
+    const data = await response.json();
+    return data.cast.slice(0, 18); // Only returning the first 18 cast members
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export default getMovieCast;

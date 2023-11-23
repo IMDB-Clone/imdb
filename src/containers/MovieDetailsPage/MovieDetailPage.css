@@ -1,6 +1,19 @@
+/* MovieDetailPage.css */
 .movie-section-background {
     background-color: #343a40;
+    width: 100%; /* Full width */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
+.movie-cast-container {
+    background-color: white; /* Set the background to white */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Add this to ensure the body doesn't have a width larger than the viewport */
 body {
-    background-color: #343a40;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
