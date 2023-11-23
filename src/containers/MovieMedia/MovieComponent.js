@@ -1,6 +1,6 @@
 // MovieComponent.js
 
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import PosterComponent from './PosterComponent';
 import TrailerComponent from './TrailerComponent';
 import { fetchMovieDetails, fetchMovieTrailers } from '../../services/DetailService'; // Adjust the path as necessary

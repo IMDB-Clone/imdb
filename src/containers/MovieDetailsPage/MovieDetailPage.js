@@ -3,6 +3,7 @@ import MovieBanner from "../../components/MovieBanner/MovieBanner";
 import MovieComponent from "../MovieMedia/MovieComponent";
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS 
 import GDMC from "../../components/MovieGrene-description/GDMC";
+import Footer from "../../components/Footer/Footer";
 import "./MovieDetailPage.css";
 const MovieDetailPage = ({ movieId }) => {
     return (
@@ -10,6 +11,7 @@ const MovieDetailPage = ({ movieId }) => {
           <MovieBanner movieId={movieId} />
           <MovieComponent movieId={movieId} />
           <GDMC movieId={movieId} />
+          <Footer />
         </div>
       );
       

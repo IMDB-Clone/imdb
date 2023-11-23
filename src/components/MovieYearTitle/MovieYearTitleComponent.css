@@ -1,0 +1,43 @@
+/* MovieYearTitleComponent.css */
+.movie-card {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.movie-image img {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 24px; /* Adjust as needed */
+    color: #333;
+}
+
+.movie-year {
+    font-size: 20px; /* Adjust as needed */
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.review-link {
+    font-size: 16px; /* Adjust as needed */
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.review-link:hover {
+    text-decoration: underline;
+}
+
+/* Add additional styling and responsive adjustments as needed */

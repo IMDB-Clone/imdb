@@ -1,0 +1,98 @@
+
+.review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-rating {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f5c518; /* Gold color for the stars */
+    margin-right: 10px;
+}
+
+.review-author {
+    font-size: 14px;
+    color: #333;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #767676;
+    margin-left: auto; /* Pushes the date to the right */
+}
+
+.review-content {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.review-helpful {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.helpful-button {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.sort-select {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    font-size: 16px; /* Set the font-size here to ensure consistency */
+}
+
+.sort-select select {
+    display: inline-block;
+    width: auto; /* Adjust width as needed, or set a specific width */
+    cursor: pointer;
+    padding: 10px 30px 10px 10px; /* Right padding to make room for the arrow */
+    outline: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    -webkit-appearance: none; /* Removes default styling of select dropdown */
+    -moz-appearance: none;
+    appearance: none;
+    position: relative; /* Ensures the text doesn't overlap the pseudo-element */
+}
+
+.sort-select:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Aligns with the right padding of the select */
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333; /* Arrow color */
+    z-index: 1;
+    pointer-events: none; /* This ensures clicks pass through the pseudo-element to the select below */
+}
+
+/* Hides the default arrow in Internet Explorer 10/11 */
+.sort-select select::-ms-expand {
+    display: none;
+}
+
+.sort-select select:hover {
+    border-color: #bbb;
+}
+
+.sort-select select:focus {
+    border-color: #777;
+}

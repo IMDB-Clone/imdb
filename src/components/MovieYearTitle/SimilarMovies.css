@@ -1,0 +1,18 @@
+/* SimilarMovies.css */
+
+.similar-movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .similar-movie-card {
+    width: 200px;
+  }
+  
+  .similar-movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  

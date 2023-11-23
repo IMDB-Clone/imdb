@@ -1,0 +1,14 @@
+.movie-reviewing {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px; /* Adjust the width as necessary */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Additional styles for child components would go here, ensuring they align with the card design */
+  

@@ -247,3 +247,47 @@ export const removeRating = async (movieId) => {
   return await response.json();
 };
 
+export const fetchTotalReview = async (movieId) => {
+  try {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${BEARER_TOKEN}` // Replace with your actual API token
+      }
+    };
+
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`;
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.results; // Return the results array containing the reviews
+  } catch (error) {
+    console.error("Error fetching total reviews:", error);
+    throw error;
+  }
+};
+
+// DetailService.js
+
+// Add this function to fetch similar movies
+export const fetchSimilarMovies = async (movieId) => {
+  try {
+    const url = `${API_BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`;
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.results.slice(0, 5); // Return the first 5 similar movies
+  } catch (error) {
+    console.error("Error fetching similar movies:", error);
+    throw error;
+  }
+};
