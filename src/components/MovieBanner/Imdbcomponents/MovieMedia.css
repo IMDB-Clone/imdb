@@ -1,0 +1,29 @@
+/* MovieMedia.css */
+.movie-media-container {
+    display: flex;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating-star {
+    font-size: 24px; /* Adjust the size as needed */
+    margin-right: 5px;
+  }
+  
+  .rating-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .rating-value {
+    font-size: 18px; /* Adjust the size as needed */
+    font-weight: bold;
+  }
+  
+  .rating-count {
+    font-size: 12px; /* Adjust the size as needed */
+  }
+  

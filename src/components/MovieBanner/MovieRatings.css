@@ -19,10 +19,24 @@
   }
   
   
-  /* Responsive design: Hide MovieRatings on smaller screens */
-  @media (max-width: 767px) {
-    .movie-ratings {
-      display: none;
-    }
+  /* This is the default style that will apply to screens larger than 767px */
+.movie-ratings-row .row .col-md-4 {
+   display:none;
+}
+
+@media (max-width: 767px) {
+  .movie-ratings-row .row .col-md-4 {
+    /* Adjust the column layout for smaller screens */
+    display: flex; /* Keep them in a flexbox */
+    flex-basis: 33.3333%; /* Each takes up one-third of the row */
+    max-width: 33.3333%; /* Maximum width set to one-third of the row */
   }
+
+  .movie-ratings-row .row {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if space runs out */
+    justify-content: space-between; /* Distribute space between items */
+  }
+}
+
   

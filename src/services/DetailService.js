@@ -177,12 +177,9 @@ export const fetchMovieData = async (movieId) => {
   }
 };
 
-// DetailService.js
-
-
 // DetailService.js////////////////////////////////////////////
 
-// ... (other imports and constants)
+
 
 export const fetchTotalReviews = async (movieId) => {
   try {
