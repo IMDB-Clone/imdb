@@ -1,66 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore'; // Import methods from Firestore
-import { db } from '../firebase'; // Adjust the path to where your firebase.js is located
-import './UserProfile.css'; // Ensure this is the correct path to your CSS file
-import personImage from './Assets/person.png'; // Ensure this is the correct path to your image file
+import React, { useState } from 'react';
+import './UserProfile.css'; 
+import personImage from './Assets/person.png'; 
 
 const UserProfile = () => {
- // Ensure useParams is capturing the userId correctly
-// Ensure useParams is capturing the userId correctly
-const { userId } = useParams();
+  const [isEditing, setIsEditing] = useState(false); 
+  const [profile, setProfile] = useState({
+    username: 'JohnDoe',
+    name: 'John Doe',
+    gender: 'Male',
+    dateOfBirth: '1990-01-01',
+    country: 'United States',
+    photoUrl: '', 
+    joiningDate: '2021-01-01',
+    ratings: [4, 5, 3],
+    topPicks: ['Movie A', 'Movie B', 'Movie C'],
+    reviews: ['Great movie!', 'Disappointing ending.'],
+    email: 'john.doe@example.com', 
+  });
 
-// Get the user ID from the URL
-  const [profile, setProfile] = useState(null); // Initialize profile state as null
-
-  console.log(userId); // Log the user ID to the console
-
-  useEffect(() => {
-    // Define an async function to fetch user data from Firestore
-    const fetchUserProfile = async () => {
-      if (userId) {
-        console.log(userId);
-        const userRef = doc(db, "users", userId); // Reference to the user document
-        try {
-          const userSnap = await getDoc(userRef);
-          if (userSnap.exists()) {
-            setProfile(userSnap.data()); // Set the user profile data to state
-          } else {
-            console.log("No such document!");
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      } else {
-        console.log('No user ID provided');
-      }
-    };
-
-    fetchUserProfile(); // Call the function to fetch user data
-  }, [userId]);
-
-  // Helper function to format date
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // If the profile is null (data is not fetched yet or there's no user), show a loading indicator
-  if (!profile) {
-    return <div>Loading...</div>;
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+  };
+
+  if (isEditing) {
+    return (
+      <div className="user-profile">
+        <div className="edit-form">
+          <h2>Edit Profile</h2>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" value={profile.name} onChange={handleChange} />
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={profile.email} onChange={handleChange} />
+          <label htmlFor="gender">Gender:</label>
+          <input type="text" id="gender" name="gender" value={profile.gender} onChange={handleChange} />
+          <label htmlFor="dateOfBirth">Date of Birth:</label>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" value={profile.dateOfBirth} onChange={handleChange} />
+          <label htmlFor="country">Country:</label>
+          <input type="text" id="country" name="country" value={profile.country} onChange={handleChange} />
+          <label htmlFor="photo">Photo:</label>
+          <input type="file" id="photo" name="photo" onChange={handleChange} />
+          <label htmlFor="joiningDate">Joining Date:</label>
+          <input type="date" id="joiningDate" name="joiningDate" value={profile.joiningDate} onChange={handleChange} />
+          <label htmlFor="ratings">Ratings:</label>
+          <input type="text" id="ratings" name="ratings" value={profile.ratings.join(', ')} onChange={handleChange} />
+          <label htmlFor="topPicks">Top Picks:</label>
+          <input type="text" id="topPicks" name="topPicks" value={profile.topPicks.join(', ')} onChange={handleChange} />
+          <label htmlFor="reviews">Reviews:</label>
+          <input type="text" id="reviews" name="reviews" value={profile.reviews.join(', ')} onChange={handleChange} />
+
+          <br />
+          <button onClick={handleSave}>Save Changes</button>
+          <button onClick={() => setIsEditing(false)}>Cancel Editing</button>
+        </div>
+      </div>
+    );
   }
 
-  // Render the user profile data
   return (
-    <div className="user-profile">
-      <div className="profile-header">
-        <img src={profile.photoUrl || personImage} alt="User" className="profile-photo"/>
+
+     <div className="user-profile">
+     <div className="profile-header">
+        <img src={profile.photoUrl || personImage} alt="User" className="profile-photo" />
         <div className="user-info">
           <h2>{profile.username}</h2>
-          <p><strong>Name: </strong>{profile.name}</p> {/* Assuming the field is called 'name' */}
-          <p><strong>Email:</strong> {profile.email}</p> {/* Assuming the field is called 'email' */}
+          <p><strong>Name: </strong>{profile.name}</p>
           <p><strong>Gender:</strong> {profile.gender}</p>
           <p><strong>Date of Birth:</strong> {formatDate(profile.dateOfBirth)}</p>
+          <p><strong>Member Since:</strong> {formatDate(profile.joiningDate)}</p>
           <p><strong>Country:</strong> {profile.country}</p>
         </div>
       </div>
@@ -88,8 +111,10 @@ const { userId } = useParams();
           ))}
         </ul>
       </div>
+      <button onClick={handleEditClick}>Edit Profile</button>
     </div>
   );
+  
 };
 
 export default UserProfile;
