@@ -1,0 +1,132 @@
+.actor-details-container {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  color: #333;
+}
+
+.actor-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.actor-photo {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.actor-name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.actor-bio {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.actor-dob {
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.known-for-container {
+  margin-top: 30px;
+}
+
+.known-for-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.known-for-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.movie-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.movie-poster-container {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  position: relative;
+}
+
+.movie-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-details {
+  padding: 10px;
+}
+
+.movie-title {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.movie-character {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Additional styles for the layout similar to the image */
+.movie-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.rating-star {
+  color: #ffc107; /* Assuming a star icon, you can use a star SVG or font icon */
+}
+
+.movie-year {
+  font-size: 14px;
+  color: #666;
+}
+
+/* You might need to adjust the layout for responsive designs */
+@media (max-width: 768px) {
+  .actor-details-container {
+    padding: 10px;
+  }
+
+  .actor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actor-photo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .actor-name {
+    font-size: 28px;
+  }
+
+  .known-for-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

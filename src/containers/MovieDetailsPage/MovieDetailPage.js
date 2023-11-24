@@ -11,7 +11,8 @@ const MovieDetailPage = ({ movieId }) => {
       <div className="movie-section-background">
           <MovieBanner movieId={movieId} />
           <MovieComponent movieId={movieId} />
-          <GDMC movieId={movieId} /><MovieCast movieId={movieId} />
+          <GDMC movieId={movieId} />
+          <MovieCast movieId={movieId} />
           <Footer />
        
         </div>

@@ -305,7 +305,7 @@ const getMovieCast = async (movieId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/movie/${movieId}/credits?language=en-US`, options);
     const data = await response.json();
-    return data.cast.slice(0, 18); // Only returning the first 18 cast members
+    return data.cast.slice(0, 10); // Only returning the first 18 cast members
   } catch (error) {
     console.error(error);
     return [];
@@ -313,3 +313,40 @@ const getMovieCast = async (movieId) => {
 };
 
 export default getMovieCast;
+// DetailService.js
+
+// ... (other code and imports)
+
+export const fetchActorDetails = async (actorId) => {
+  try {
+    const url = `${API_BASE_URL}/person/${actorId}?api_key=${API_KEY}&language=en-US`;
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const details = await response.json();
+    return details;
+  } catch (error) {
+    console.error("Error fetching actor details:", error);
+    throw error; // Re-throw to handle it in the calling function
+  }
+};
+
+export const fetchActorMovies = async (actorId) => {
+  try {
+    const url = `${API_BASE_URL}/person/${actorId}/movie_credits?api_key=${API_KEY}&language=en-US`;
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const movies = await response.json();
+    return movies; // Assuming you want to return the top 4 movies
+  } catch (error) {
+    console.error("Error fetching actor's movies:", error);
+    throw error; // Re-throw to handle it in the calling function
+  }
+};
