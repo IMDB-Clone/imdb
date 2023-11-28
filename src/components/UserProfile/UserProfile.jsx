@@ -1,27 +1,67 @@
-import React, { useState } from 'react';
-import './UserProfile.css'; 
-import personImage from './Assets/person.png'; 
+
+import React, { useState, useEffect } from 'react';
+import './UserProfile.css';
+import personImage from './Assets/person.png';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+
 
 const UserProfile = () => {
-  const [isEditing, setIsEditing] = useState(false); 
+  const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    username: 'JohnDoe',
-    name: 'John Doe',
-    gender: 'Male',
-    dateOfBirth: '1990-01-01',
-    country: 'United States',
-    photoUrl: '', 
-    joiningDate: '2021-01-01',
-    ratings: [4, 5, 3],
-    topPicks: ['Movie A', 'Movie B', 'Movie C'],
-    reviews: ['Great movie!', 'Disappointing ending.'],
-    email: 'john.doe@example.com', 
+    username: '',  
+    name: '',
+    gender: '',
+    dateOfBirth: '',
+    country: '',
+    //photoUrl: '',
+    joiningDate: '',
+    ratings: [],
+    topPicks: [],
+    reviews: [],
+    email: '',
   });
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = getFirestore();
+      const docRef = doc(db, 'Users', 'Ef77XyYkwCRJLtijHXuw');
+      try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          console.log('Fetched user data:', userData);
+          const bdate = userData.dateofbirth.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const joindate = userData.MemberSince.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          console.log("bdate",bdate);
+          console.log("joindate",joindate);
+          setProfile((prevProfile) => ({
+            ...prevProfile,
+            username: userData.username || '',
+            name: userData.Name || '', 
+            gender: userData.Gender || '',
+            dateOfBirth: bdate|| '', 
+            country: userData.Country || '',
+            joiningDate: joindate || '',
+            ratings: userData.Ratings || [],
+            topPicks: userData['Top picks'] || [],
+            reviews: userData.Reviews || [],
+            email: userData.email || '',
+
+          }));
+        } else {
+          console.log('Document not found');
+        }
+      } catch (error) {
+        console.error('Error getting user document:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -36,8 +76,11 @@ const UserProfile = () => {
   };
 
   const handleSave = () => {
+    
     setIsEditing(false);
   };
+
+
 
   if (isEditing) {
     return (
@@ -82,8 +125,8 @@ const UserProfile = () => {
           <h2>{profile.username}</h2>
           <p><strong>Name: </strong>{profile.name}</p>
           <p><strong>Gender:</strong> {profile.gender}</p>
-          <p><strong>Date of Birth:</strong> {formatDate(profile.dateOfBirth)}</p>
-          <p><strong>Member Since:</strong> {formatDate(profile.joiningDate)}</p>
+          <p><strong>Date of Birth:</strong> {profile.dateOfBirth}</p>
+          <p><strong>Member Since:</strong> {profile.joiningDate}</p>
           <p><strong>Country:</strong> {profile.country}</p>
         </div>
       </div>

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// Import these directly from firebase/auth if they are not custom functions
-// Ensure these are correctly imported from your Firebase setup
 import google_icon from '../Assets/google.png';
 import facebook_icon from '../Assets/facebook.png';
 import IMDB_icon from '../Assets/IMDB.png';
@@ -9,11 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from 'firebase/auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-
+import { doc, setDoc, getFirestore } from 'firebase/firestore';
 
 const LoginSignup = () => {
-  const [active, setActive] = useState('login'); // State to manage active tab
-
+  const [active, setActive] = useState('login'); 
   return (
     <div className="auth-container">
       <div className="top-icon">
@@ -36,15 +33,29 @@ const Login = ({ setActive }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage] = useState(''); 
+  const db = getFirestore();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userRef= doc(db, 'Users', userCredential.user.uid);
+      await setDoc(userRef,{
+        email : userCredential.user.email,
+        lastLogin:new Date()
+        
+      },{merge:true
+      });
       console.log(userCredential.user);
       navigate('/home');
     } catch (error) {
       console.log(error.code, error.message);
+      if (error.code === 'auth/wrong-password') {
+        window.alert('Wrong password. Please try again.'); 
+      } else {
+        window.alert('Wrong password. Please try again.'); 
+      }
     }
   };
 
@@ -56,24 +67,21 @@ const Login = ({ setActive }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log('Google sign-in successful, user:', result.user);
-      navigate('/home'); // Redirect to home page upon successful login
+      navigate('/home'); 
     } catch (error) {
       console.error('Error during Google sign-in', error);
     }
   };
   const handleFacebookLogin = async () => {
     const provider = new FacebookAuthProvider();
-    // Attempt to sign in with a popup, which will use the currently logged-in Facebook account
-    // or prompt the user to log in if they are not.
     try {
       const result = await signInWithPopup(auth, provider);
       console.log('Facebook sign-in successful, user:', result.user);
-      navigate('/home'); // Redirect to home page upon successful login
+      navigate('/home'); 
     } catch (error) {
       console.error('Error during Facebook sign-in', error);
     }
   };
-
   return (
     <div>
       <form onSubmit={handleLoginSubmit}>
@@ -89,6 +97,7 @@ const Login = ({ setActive }) => {
             <button onClick={() => navigate('/forgotpassword')} className="forgotPasswordButton">
               Forgot Your Password?
             </button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
         </div>
         <button type="submit">Sign in</button>
@@ -107,21 +116,23 @@ const Login = ({ setActive }) => {
     </div>
   );
 };
-
 const Signup = ({ setActive }) => {
   const navigate = useNavigate();
+  const db=getFirestore();
   const [signupForm, setSignupForm] = useState({
     name: '',
     email: '',
+    username: '',
+    Gender: '',
+    dateOfBirth: '',
+    country: '',
     password: '',
     confirmPassword: '',
   });
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setSignupForm({ ...signupForm, [name]: value });
   };
-
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (signupForm.password !== signupForm.confirmPassword) {
@@ -130,18 +141,36 @@ const Signup = ({ setActive }) => {
     }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, signupForm.email, signupForm.password);
-      console.log(userCredential.user);
-      navigate('/login');
+      const userRef= doc(db, 'Users', userCredential.user.uid); 
+      await setDoc(userRef,{
+        name: signupForm.name,
+        email: signupForm.email,
+        username: signupForm.username,
+        gender:signupForm.Gender,
+        dateOfBirth:signupForm.dateOfBirth,
+        country:signupForm.country,
+      },{merge:true});
+      alert('Account created successfully');
+      navigate('/home');
     } catch (error) {
       console.log(error.code, error.message);
+      alert("Account creation failed")
     }
   };
-
   return (
     <div>
-      <form onSubmit={handleSignupSubmit}>
-        <label htmlFor="name">First and Last Name</label>
+      <form onSubmit={handleSignupSubmit} className="signup-form">
+        
+        <label htmlFor="name">Full Name </label>
         <input type="text" id="name" name="name" value={signupForm.name} onChange={handleInputChange} required />
+        <label htmlFor="username">Username</label>
+        <input type="text" id="username" name="username" value={signupForm.username} onChange={handleInputChange} required />
+        <label htmlFor="Gender">Gender</label>
+        <input type="text" id="Gender" name="Gender" value={signupForm.Gender} onChange={handleInputChange} required />
+        <label htmlFor='dateOfBirth'>Date of Birth</label>
+        <input type='date' id='dateOfBirth' name='dateOfBirth' value={signupForm.dateOfBirth} onChange={handleInputChange} required />
+        <label htmlFor='country'>Country</label>
+        <input type='text' id='country' name='country' value={signupForm.country} onChange={handleInputChange} required />
         <label htmlFor="signupEmail">Email</label>
         <input type="email" id="signupEmail" name="email" value={signupForm.email} onChange={handleInputChange} required />
         <label htmlFor="signupPassword">Password</label>
@@ -149,9 +178,15 @@ const Signup = ({ setActive }) => {
         <label htmlFor="confirmPassword">Re-enter password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" value={signupForm.confirmPassword} onChange={handleInputChange} required />
         <button type="submit">Create your IMDB account</button>
+        <button 
+          type="button" 
+          onClick={() => setActive('login')} 
+          className="back-to-login-button"
+        >
+          Back to Login
+        </button>
       </form>
     </div>
   );
 };
-
 export default LoginSignup;

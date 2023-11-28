@@ -1,7 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { 
+  getFirestore , collection,getDocs
+ } from "firebase/firestore";
+
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-// Your Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyDU1eLTPx4o3-CC-wkXULYSdDfjy8ZX0kI",
   authDomain: "project-1b9a4.firebaseapp.com",
@@ -12,8 +15,14 @@ const firebaseConfig = {
   measurementId: "G-2HSW7XE7E8"
 };
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Initialize Firestore
-const auth = getAuth(app); // Initialize Firebase Auth
+const db = getFirestore(); 
+
+const colRef = collection(db, "users");
+getDocs(colRef).then((snapshot) => {
+    console.log(snapshot.docs);
+  });
+
+const auth = getAuth(app); 
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
