@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import google_icon from '../Assets/google.png';
 import facebook_icon from '../Assets/facebook.png';
 import IMDB_icon from '../Assets/IMDB.png';
@@ -7,10 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from 'firebase/auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import { doc, setDoc, getFirestore , getDoc } from 'firebase/firestore';
+import { UserContext } from '../../usercontext';
 
 const LoginSignup = () => {
   const [active, setActive] = useState('login'); 
+  const {setUser}=useContext(UserContext);
+  const navigate = useNavigate();
   return (
     <div className="auth-container">
       <div className="top-icon">
@@ -35,20 +38,26 @@ const Login = ({ setActive }) => {
   const [password, setPassword] = useState('');
   const [errorMessage] = useState(''); 
   const db = getFirestore();
+  const { setUser } = useContext(UserContext);
+
+   
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    try {
+    try { 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const userRef= doc(db, 'Users', userCredential.user.uid);
-      await setDoc(userRef,{
-        email : userCredential.user.email,
-        lastLogin:new Date()
-        
-      },{merge:true
-      });
+      const additionalData = await fetchUserDetails(userCredential.user.uid);
+      console.log(additionalData);
+      setUser({
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+      
+        ...additionalData
+      })
+      
+      
       console.log(userCredential.user);
-      navigate('/home');
+      navigate('/profile');
     } catch (error) {
       console.log(error.code, error.message);
       if (error.code === 'auth/wrong-password') {
@@ -58,6 +67,18 @@ const Login = ({ setActive }) => {
       }
     }
   };
+  const fetchUserDetails = async (uid) => {
+    const db = getFirestore();
+    const docRef = doc(db, 'Users', uid); // Assuming 'users' is your collection
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return docSnap.data(); // Returns the user details
+    } else {
+        console.log('No such document!');
+        return null; // Handle the case where user details don't exist
+    }
+};
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
