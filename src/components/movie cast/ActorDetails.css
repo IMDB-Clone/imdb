@@ -1,132 +1,179 @@
-.actor-details-container {
+/* Overall body styling */
+body {
   font-family: Arial, sans-serif;
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  color: #333;
+  background-color: #333; /* Dark background */
+  margin: 0;
+  padding: 0;
+  color: #fff; /* White text color for contrast */
 }
 
-.actor-header {
+/* Actor details container styling */
+.actor-details-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #444; /* Slightly lighter background for the container */
+  padding: 20px;
+  border-bottom: 5px solid #ffc107; /* Highlight color */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Adding some shadow for depth */
 }
 
+/* Actor image styling */
 .actor-photo {
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 150px; /* Adjust size as needed */
+  height: 150px; /* Adjust size as needed */
   margin-right: 20px;
+  margin-bottom: 20px;
   object-fit: cover;
+  border: 3px solid #ffc107; /* Highlight color */
 }
 
-.actor-name {
-  font-size: 32px;
+/* Actor name and lifespan styling */
+.actor-name,
+.actor-lifespan {
+  font-size: 24px;
   font-weight: bold;
+  color: #ccc; /* Lighter text color for lifespan */
+}
+
+.actor-lifespan {
+  font-size: 18px; /* Specific size for lifespan */
+  margin-bottom: 5px; /* Space between name and lifespan */
+}
+
+/* Biography and additional details styling */
+.actor-bio,
+.actor-birth-death {
+  font-size: 16px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .actor-bio {
-  font-size: 16px;
-  line-height: 1.6;
+  flex: 1; /* Take up remaining space */
+  margin-right: 20px;
 }
 
-.actor-dob {
-  font-size: 16px;
-  color: #666;
-  margin-top: 10px;
+/* Birth and death details styling */
+.actor-birth-death {
+  background-color: #ffc107; /* Highlight color */
+  display: inline-block; /* For auto width based on content */
+  margin-top: 10px; /* Space from the biography text */
 }
 
-.known-for-container {
-  margin-top: 30px;
+/* Button styling */
+.actor-button {
+  background-color: #ffc107; /* Highlight color */
+  color: #333; /* Text color for the button */
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Known for section styling */
+.known-for-section {
+  overflow-x: auto; /* Enables horizontal scrolling */
+  white-space: nowrap; /* Ensures items are in a single line */
+  padding: 20px 0;
+  background-color: white; /* Slightly lighter background for the container */
+  width:100%;
 }
 
 .known-for-title {
   font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  padding-left: 20px; /* Aligns with the grid items */
 }
 
+/* Style for the grid of movies */
 .known-for-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
+  display: flex; /* Lays out the children in a row */
+  gap: 16px;
+  padding: 0 20px;
 }
 
+/* Style for each movie item */
 .movie-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: inline-block; /* Allows for horizontal layout */
+  width: 200px; /* Fixed width */
+  border: 1px solid #e3e3e3; /* Light grey border */
+  border-radius: 4px;
+  overflow: hidden; /* Ensures the image and content fit neatly */
+  background-color: #f8f8f8; /* Light background for each item */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  white-space: normal; /* Override the nowrap from the container for text wrapping */
 }
 
-.movie-poster-container {
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  position: relative;
-}
-
+/* Movie image styling */
 .movie-poster {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block; /* Remove any extra space below the image */
 }
 
+/* Movie details (title, rating, role) */
 .movie-details {
   padding: 10px;
+  text-align: left;
 }
 
-.movie-title {
-  
-  margin: 8px 0;
-}
-
-.movie-character {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Additional styles for the layout similar to the image */
-.movie-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.rating-star {
-  color: #ffc107; /* Assuming a star icon, you can use a star SVG or font icon */
-}
-
+.movie-title,
+.movie-rating,
+.movie-role,
 .movie-year {
   font-size: 14px;
   color: #666;
 }
 
-/* You might need to adjust the layout for responsive designs */
+.movie-title {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.rating-star {
+  /* Placeholder if you use a star icon font */
+  color: #ffcc00; /* Golden color for the star */
+}
+
+.movie-role {
+  font-size: 14px;
+  color: #999; /* Light grey for the character name/role */
+}
+
+.movie-year {
+  font-size: 14px;
+  color: #999; /* Light grey for the year */
+}
+
+/* Responsive design adjustments */
 @media (max-width: 768px) {
   .actor-details-container {
     padding: 10px;
   }
 
-  .actor-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .actor-photo {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
-  }
-
-  .actor-name {
-    font-size: 28px;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
   }
 
   .known-for-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+  }
+
+  .movie-item {
+    width: 150px; /* Adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .known-for-title {
+    font-size: 20px;
   }
 }
