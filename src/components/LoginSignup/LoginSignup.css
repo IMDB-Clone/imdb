@@ -1,0 +1,169 @@
+
+.icon {
+  width: 40px; /* Adjust the size as needed */
+  height: auto;
+}
+
+.top-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.top-icon img {
+  width: 70px; /* Set the width of the image */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensures the image doesn't interact with other elements */
+  margin-bottom: 20px ;
+  margin-top: 10px;
+}
+
+.auth-card {
+  width: 400px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  font-family: Arial, sans-serif;
+  position: relative; /* Maintain stacking context */
+  z-index: 1; /* Ensure the white card is above the icon */
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom:-4px;
+  margin-top: 10px;
+
+}
+
+.card-head h3 {
+  cursor: pointer;
+  padding-bottom: 0px;
+  color: #000; /* Adjust text color to IMDb's design */
+}
+
+.card-head .active {
+  border-bottom: 2px solid #000; /* Active tab underline color */
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; /* Add space between forms */
+}
+
+label {
+  margin-bottom: 5px; /* Add space below each label */
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.aux-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #666; /* Adjust color to IMDb's design */
+}
+
+label[for="email"],
+label[for="password"] {
+  font-weight: bold;
+}
+
+input#email,
+input#password {
+  border: 1px solid black;
+}
+
+
+.remember-me input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.forgot-password {
+  cursor: pointer;
+  margin-top: 10px; /* Adjust as needed to place it on the same line */
+}
+
+.forgotPasswordButton {
+  background-color: white;
+  color: #0071eb;
+  border: none;
+  padding: 0;
+}
+button[type="submit"] {
+  background-color: #FFC72C;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px; /* Adjust margin as needed */
+  cursor: pointer;
+}
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-login p {
+  margin-bottom: 10px;
+  color: #000; /* Text color */
+}
+
+.social-login .social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: #000;
+  text-transform: none;
+}
+
+.social-login .social-button img {
+  width: 20px;
+  margin-right: 8px;
+}
+h4{
+  color: black;
+  background-color: white;
+  border: 2px solid lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}

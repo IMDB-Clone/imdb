@@ -1,0 +1,33 @@
+/* TrailerList.css */
+
+.other-trailers .card {
+    cursor: pointer;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 0px;
+  }
+  
+  .other-trailers .title{
+    color: white;
+    margin-bottom: 10px;
+    border-left: 5px solid #ffc107;
+    padding-left: 10px;
+    grid-column: 1 / -1;
+  }
+
+  .other-trailers .card-img-top {
+    width: 100%; /* Ensure the image takes the width of the card */
+    object-fit: cover; /* Cover the aspect ratio of the thumbnail */
+  }
+  
+  .other-trailers .card-body {
+    padding: 0.5rem; /* Reduced padding for the card body */
+  }
+  
+  .other-trailers .card-text {
+    margin-top: 0.5rem; /* Space between image and title */
+    font-size: 0.95rem; /* Smaller font size for text */
+    font-weight: 500;
+    color: white;
+  }
+  

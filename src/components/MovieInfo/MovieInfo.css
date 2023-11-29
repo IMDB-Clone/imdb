@@ -1,0 +1,29 @@
+/* MovieInfo.css */
+.movie-info {
+    color: #fff; /* White text color */
+    padding-bottom: 20px; /* Padding at the bottom */
+  }
+  
+  .movie-info .movie-title {
+    font-size: 3rem; /* Larger font size for title */
+  }
+  
+  .movie-info .movie-poster-container {
+    margin-bottom: 1rem; /* Space below the poster */
+  }
+  
+  .movie-info .movie-poster {
+    max-width: 100%; /* Ensure poster is not larger than its container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for depth */
+  }
+  
+  .movie-info .genre-bubble {
+    font-size: 1rem; /* Font size for genre bubbles */
+    padding: 5px 10px; /* Padding inside the bubbles */
+    margin: 5px; /* Margin around the bubbles */
+    border-radius: 20px; /* Rounded pill shape */
+    border: 1px solid white; /* White border */
+    display: inline-block; /* To ensure proper spacing and border */
+    background-color: rgba(58, 58, 58, 0.5); /* Semi-transparent background */
+  }
+  

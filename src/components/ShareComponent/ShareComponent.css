@@ -1,0 +1,67 @@
+/* ShareComponent.css */
+.share-component {
+    /* Position the share component at the top right of the FeaturedTrailer */
+    position: absolute;
+    top: 1rem; /* Adjust as needed */
+    right: 1rem; /* Adjust as needed */
+    z-index: 10;
+  }
+  
+.share-component .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .share-component .share-icon {
+    cursor: pointer;
+    /* Adjust size as necessary */
+    max-width: 50px;
+    margin-right: 40px;
+
+  }
+  
+  .share-component .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position the dropdown below the share icon */
+    right: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 0.9rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #cecece;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+  }
+  
+  .share-component .dropdown-menu.show {
+    display: block;
+  }
+  
+  .share-component .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .share-component .dropdown-item img.icon {
+    margin-right: 0.5rem;
+  }
+  
+  .share-component .icon{
+    max-width: 30px;
+  }

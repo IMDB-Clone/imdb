@@ -1,0 +1,134 @@
+.review-popup-container {
+    background-color: #fff;
+    width: 100%; /* Adjust width as needed */
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+  
+  .review-popup-container .review-popup {
+    width: 100%; 
+    border-radius: 10px;
+  }
+  
+  .review-popup-container .close {
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .review-popup-container img {
+    width: 20%;
+    height: auto;
+  }
+
+  .review-popup-container  .movie-info{
+color: black;
+padding:0px;
+  }
+  
+  .review-popup-container h5 {
+    font-size: 18px; /* Adjust to match the image */
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+
+  
+  .review-popup-container  .form-control, .review-popup-container .form-check-label {
+    font-size: 14px; /* Adjust to match the image */
+    color: #333; /* Adjust to match the image */
+  }
+  
+  .review-popup-container .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .review-popup-container  .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  
+  .review-popup-container  .form-check-label {
+    vertical-align: middle;
+  }
+  
+  .review-popup-container .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  /* Ensure the form takes up the necessary space */
+  .review-popup-container form {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 150px); /* Adjust based on your header/footer size */
+    justify-content: space-between;
+  }
+  
+
+/* Star rating wrapper styling */
+.star-rating {
+  display: inline-block;
+  font-size: 0; /* to eliminate whitespace from inline-block */
+}
+
+/* Hide the radio buttons */
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+/* Style the labels (stars) */
+.star-rating label {
+  font-size: 24px; /* Size of the stars */
+  color: #ccc; /* Color of the stars */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+/* Style the stars on hover and when checked */
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type="radio"]:checked ~ label {
+  color: #ffc107; /* Color of active stars */
+}
+
+/* Reverse the order of the labels to correctly display the stars */
+.star-rating {
+  direction: rtl; /* This reverses the order of the inline elements */
+}
+
+.star-rating label {
+  direction: ltr; /* This ensures the stars themselves are not reversed */
+}
+
+/* Optional: Add some space between the stars */
+.star-rating label:not(:last-child) {
+  margin-right: 5px;
+}
+
+.submit-btn{
+    background-color: white !important;
+    border-color: lightgray !important;
+    color: gray !important;
+}
+
+.submit-btn:hover{
+    background-color: lightgray !important;
+    border-color: white !important;
+}
