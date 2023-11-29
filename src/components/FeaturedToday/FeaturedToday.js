@@ -23,15 +23,6 @@ const FeaturedToday = () => {
     getPopularMovies();
   }, []);
 
-  const handleDoubleClick = async (movieId) => {
-    try {
-      const movieDetails = await fetchMovieDetails(movieId);
-      setSelectedMovie(movieDetails);
-      setIsReviewPopupOpen(true);
-    } catch (error) {
-      console.error('Error fetching movie details:', error);
-    }
-  };
 
   return (
     <div className="featured-today">
@@ -39,10 +30,9 @@ const FeaturedToday = () => {
       <div className="movies-container">
         {movies.map((movie) => (
           <a
-            // href={`/movie/${movie.id}`}
+            href={`/movie/${movie.id}`}
             key={movie.id}
             className="movie-item"
-            onDoubleClick={() => handleDoubleClick(movie.id)}
           >
             <div className="custom-movie-item">
               <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
