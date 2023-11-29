@@ -1,0 +1,45 @@
+/* MovieTrailersPage.css */
+.movie-trailers-page{
+    background-color: #1F1F1F;
+    width: 100%;
+}
+  
+  .movie-info .movie-poster-container {
+    width: 100%; /* Poster takes up full width of its container */
+    padding: 15px; /* Add some padding around the poster */
+  }
+  
+  .movie-info .movie-poster {
+    width: 100%; /* Poster image takes up full width of its container */
+    height: auto; /* Height is set automatically to maintain aspect ratio */
+  }
+  
+  .featured-trailer iframe {
+    width: 100%; /* Video takes up full width of its container */
+    height: auto; /* Height is set automatically to maintain aspect ratio */
+    min-height: 400px; /* Set a minimum height for the video */
+  }
+  
+  .other-trailers .trailer-thumbnail {
+    margin-bottom: 15px; /* Add margin between trailer thumbnails */
+  }
+  
+  .other-trailers img {
+    width: 100%; /* Thumbnails take up full width of its container */
+    height: auto; /* Height is set automatically to maintain aspect ratio */
+  }
+
+  .featured-trailer-container {
+    position: relative; /* For absolute positioning of ShareComponent */
+  }
+  
+  
+  /* Responsive adjustments for larger screens */
+  @media (min-width: 768px) {
+    .featured-trailer iframe {
+      height: 500px; /* Increase height of the video for larger screens */
+    }
+  }
+  
+  /* Further customization can be added as needed */
+  
