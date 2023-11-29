@@ -146,6 +146,7 @@ const Signup = ({ setActive }) => {
     username: '',
     Gender: '',
     dateOfBirth: '',
+    MemberSince: '',
     country: '',
     password: '',
     confirmPassword: '',
@@ -166,6 +167,7 @@ const Signup = ({ setActive }) => {
       await setDoc(userRef,{
         name: signupForm.name,
         email: signupForm.email,
+        MemberSince: signupForm.MemberSince,
         username: signupForm.username,
         gender:signupForm.Gender,
         dateOfBirth:signupForm.dateOfBirth,
@@ -190,6 +192,9 @@ const Signup = ({ setActive }) => {
         <input type="text" id="Gender" name="Gender" value={signupForm.Gender} onChange={handleInputChange} required />
         <label htmlFor='dateOfBirth'>Date of Birth</label>
         <input type='date' id='dateOfBirth' name='dateOfBirth' value={signupForm.dateOfBirth} onChange={handleInputChange} required />
+        <label htmlFor='MemberSince'>Member Since</label>
+        <input type='date' id='MemberSince' name='MemberSince' value={signupForm.MemberSince} onChange={handleInputChange} required />
+
         <label htmlFor='country'>Country</label>
         <input type='text' id='country' name='country' value={signupForm.country} onChange={handleInputChange} required />
         <label htmlFor="signupEmail">Email</label>

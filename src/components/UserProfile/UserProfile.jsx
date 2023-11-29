@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext } from 'react';
 import './UserProfile.css';
 import personImage from './Assets/person.png';
@@ -10,13 +9,12 @@ const UserProfile = () => {
   const {user}=useContext(UserContext);
   console.log(user);
   const [profile, setProfile] = useState({
-    username: '',  
+    username: '',
     name: '',
     gender: '',
     dateOfBirth: '',
     country: '',
-    //photoUrl: '',
-    joiningDate: '',
+    MemberSince: '',
     ratings: [],
     topPicks: [],
     reviews: [],
@@ -41,11 +39,11 @@ const UserProfile = () => {
           setProfile((prevProfile) => ({
             ...prevProfile,
             username: userData.username || '',
-            name: userData.Name || '', 
+            name: userData.Name || '',
             gender: userData.Gender || '',
-            dateOfBirth: bdate|| '', 
+            dateOfBirth: bdate || '',
             country: userData.Country || '',
-            joiningDate: joindate || '',
+            MemberSince:userData.MemberSince || '',
             ratings: userData.Ratings || [],
             topPicks: userData['Top picks'] || [],
             reviews: userData.Reviews || [],
@@ -90,26 +88,19 @@ const UserProfile = () => {
         <div className="edit-form">
           <h2>Edit Profile</h2>
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={user.name} onChange={handleChange} />
+          <input type="text" id="name" name="name" value={profile.name} onChange={handleChange} />
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={user.email} onChange={handleChange} />
+          <input type="email" id="email" name="email" value={profile.email} onChange={handleChange} />
           <label htmlFor="gender">Gender:</label>
-          <input type="text" id="gender" name="gender" value={user.gender} onChange={handleChange} />
+          <input type="text" id="gender" name="gender" value={profile.gender} onChange={handleChange} />
           <label htmlFor="dateOfBirth">Date of Birth:</label>
-          <input type="date" id="dateOfBirth" name="dateOfBirth" value={user.dateOfBirth} onChange={handleChange} />
-          <label htmlFor="country">Country:</label>
-          <input type="text" id="country" name="country" value={user.country} onChange={handleChange} />
-          {/* <label htmlFor="photo">Photo:</label>
-          <input type="file" id="photo" name="photo" onChange={handleChange} /> */}
-          <label htmlFor="joiningDate">Joining Date:</label>
-          <input type="date" id="joiningDate" name="joiningDate" value={user.joiningDate} onChange={handleChange} />
-          <label htmlFor="ratings">Ratings:</label>
-          <input type="text" id="ratings" name="ratings" value={user.ratings.join(', ')} onChange={handleChange} />
-          <label htmlFor="topPicks">Top Picks:</label>
-          <input type="text" id="topPicks" name="topPicks" value={user.topPicks.join(', ')} onChange={handleChange} />
-          <label htmlFor="reviews">Reviews:</label>
-          <input type="text" id="reviews" name="reviews" value={user.reviews.join(', ')} onChange={handleChange} />
+          <input type="date" id="dateOfBirth" name="dateOfBirth" value={profile.dateOfBirth} onChange={handleChange} />
+          <label htmlFor="joiningDate">Member Since:</label>
+          <input type="date" id="joiningDate" name="joiningDate" value={profile.MemberSince} onChange={handleChange} />
 
+          <label htmlFor="country">Country:</label>
+          <input type="text" id="country" name="country" value={profile.country} onChange={handleChange} />
+          {/* Rest of the form fields */}
           <br />
           <button onClick={handleSave}>Save Changes</button>
           <button onClick={() => setIsEditing(false)}>Cancel Editing</button>
@@ -128,7 +119,7 @@ const UserProfile = () => {
           <p><strong>Name: </strong>{user.name}</p>
           <p><strong>Gender:</strong> {user.gender}</p>
           <p><strong>Date of Birth:</strong> {user.dateOfBirth}</p>
-          <p><strong>Member Since:</strong> {user.joiningDate}</p>
+          <p><strong>Member Since:</strong> {user.MemberSince}</p>
           <p><strong>Country:</strong> {user.country}</p>
         </div>
       </div>
