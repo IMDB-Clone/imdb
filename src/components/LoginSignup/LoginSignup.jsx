@@ -1,19 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import google_icon from '../Assets/google.png';
 import facebook_icon from '../Assets/facebook.png';
 import IMDB_icon from '../Assets/IMDB.png';
 import './LoginSignup.css';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase';
-import { signInWithPopup, GoogleAuthProvider,FacebookAuthProvider } from 'firebase/auth';
+import { auth, storage } from '../../firebase'; // Make sure 'storage' is imported here
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc, getFirestore , getDoc } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { UserContext } from '../../usercontext';
 
 const LoginSignup = () => {
   const [active, setActive] = useState('login'); 
-  const {setUser}=useContext(UserContext);
-  const navigate = useNavigate();
+  //const {setUser}=useContext(UserContext);
+  //const navigate = useNavigate();
   return (
     <div className="auth-container">
       <div className="top-icon">
@@ -37,7 +38,7 @@ const Login = ({ setActive }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage] = useState(''); 
-  const db = getFirestore();
+  //const db = getFirestore();
   const { setUser } = useContext(UserContext);
 
    
@@ -151,6 +152,32 @@ const Signup = ({ setActive }) => {
     password: '',
     confirmPassword: '',
   });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+    } else {
+      setSelectedFile(null);
+    }
+  };
+  useEffect(() => {
+    // This function will be called for cleanup
+    return () => {
+      if (selectedFile) {
+        URL.revokeObjectURL(selectedFile);
+      }
+    };
+  }, [selectedFile]);
+  const renderPhoto = () => {
+    if (!selectedFile) {
+      return null;
+    }
+    const photoURL = URL.createObjectURL(selectedFile);
+    return <img src={photoURL} alt="Selected" style={{ width: '100px', height: '100px' }} />;
+  };
+
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setSignupForm({ ...signupForm, [name]: value });
@@ -162,7 +189,13 @@ const Signup = ({ setActive }) => {
       return;
     }
     try {
+
       const userCredential = await createUserWithEmailAndPassword(auth, signupForm.email, signupForm.password);
+      if(selectedFile){
+        const photoPath=`users/${userCredential.user.uid}/${selectedFile.name}`;
+        const photoStorageRef=storageRef(storage,photoPath);
+        const snapshot=await uploadBytes(photoStorageRef,selectedFile);
+        const photoURL=await getDownloadURL(snapshot.ref);
       const userRef= doc(db, 'Users', userCredential.user.uid); 
       await setDoc(userRef,{
         name: signupForm.name,
@@ -172,13 +205,16 @@ const Signup = ({ setActive }) => {
         gender:signupForm.Gender,
         dateOfBirth:signupForm.dateOfBirth,
         country:signupForm.country,
+        photoURL:photoURL,
       },{merge:true});
       alert('Account created successfully');
       navigate('/home');
+    }
     } catch (error) {
       console.log(error.code, error.message);
       alert("Account creation failed")
     }
+
   };
   return (
     <div>
@@ -194,7 +230,9 @@ const Signup = ({ setActive }) => {
         <input type='date' id='dateOfBirth' name='dateOfBirth' value={signupForm.dateOfBirth} onChange={handleInputChange} required />
         <label htmlFor='MemberSince'>Member Since</label>
         <input type='date' id='MemberSince' name='MemberSince' value={signupForm.MemberSince} onChange={handleInputChange} required />
-
+        <label htmlFor='photo'>Upload Photo</label>
+        <input type='file' id='photo' accept="image/*" onChange={handleFileChange}  />
+        {renderPhoto()}
         <label htmlFor='country'>Country</label>
         <input type='text' id='country' name='country' value={signupForm.country} onChange={handleInputChange} required />
         <label htmlFor="signupEmail">Email</label>

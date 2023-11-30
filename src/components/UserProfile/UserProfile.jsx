@@ -36,6 +36,7 @@ const UserProfile = () => {
           const joindate = userData.MemberSince.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
           console.log("bdate",bdate);
           console.log("joindate",joindate);
+          console.log(userData.photoURL);
           setProfile((prevProfile) => ({
             ...prevProfile,
             username: userData.username || '',
@@ -48,8 +49,12 @@ const UserProfile = () => {
             topPicks: userData['Top picks'] || [],
             reviews: userData.Reviews || [],
             email: userData.email || '',
+            photoURL: userData.photoURL || '',
+            
 
           }));
+
+
         } else {
           console.log('Document not found');
         }
@@ -113,7 +118,11 @@ const UserProfile = () => {
 
      <div className="user-profile">
      <div className="profile-header">
-        {/* <img src={user.photoUrl || personImage} alt="User" className="profile-photo" /> */}
+
+     <img src="https://firebasestorage.googleapis.com/v0/b/project...token=..." alt="User" className='profile-photo' />
+
+
+
         <div className="user-info">
           <h2>{user.username}</h2>
           <p><strong>Name: </strong>{user.name}</p>

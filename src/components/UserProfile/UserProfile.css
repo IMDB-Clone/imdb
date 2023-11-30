@@ -17,17 +17,12 @@
 }
 
 .profile-photo {
-  position: absolute; /* Change to absolute */
-  top: -60px; /* Adjust this value to position the photo above the container */
-  left: 50%; /* Center align */
-  transform: translateX(-50%); /* Adjust for center alignment */
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid #ffc800;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  max-width: 100px; /* Example width, adjust as needed */
+  max-height: 100px; /* Example height, adjust as needed */
+  border-radius: 50%; /* If you want a circular image */
+  /* Add more styles as needed */
 }
+
 .user-info {
   flex-grow: 1;
 }
