@@ -3,7 +3,7 @@ import MovieYearTitleComponent from "../../components/MovieYearTitle/MovieYearTi
 import MovieCounterAndReviews from "../../components/MovieYearTitle/MovieCounterAndReviews";
 import "./MovieReviewing.css"; // Ensure you have this CSS file
 
-const MovieReviewing = ({ movieId }) => {
+const MovieReviewing = ({ movieId , Session_ID}) => {
   return (
     <div className="movie-reviewing">
       <MovieYearTitleComponent movieId={movieId} />

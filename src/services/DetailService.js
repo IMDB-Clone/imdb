@@ -3,6 +3,7 @@
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
 const BEARER_TOKEN = process.env.REACT_APP_ACCESS_TOKEN; // Replace with actual token
+const  Account_id = process.env.REACT_APP_ACCOUNT_ID; // Replace with actual token
 
 const fetchOptions = {
   method: 'GET',
@@ -49,10 +50,10 @@ export const fetchMovieTrailers = async (movieId) => {
 // DetailService.js
 
 // ... (other imports and constants)
-
-export const fetchWatchlistStatus = async (movieId) => {
+export const fetchWatchlistStatus = async (movieId, Session_ID) => { ////////////////////////////////////////////////////here i should add session id 
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/account_states`, {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/account_states?session_id=${Session_ID}`;
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         accept: 'application/json',
@@ -72,9 +73,12 @@ export const fetchWatchlistStatus = async (movieId) => {
   }
 };
 
-export const updateWatchlist = async (movieId, newWatchlistStatus) => {
+export const updateWatchlist = async ( movieId, newWatchlistStatus,Session_ID) => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/account/20709913/watchlist`, {
+    // Construct the URL with dynamic accountId and sessionId
+    const url = `https://api.themoviedb.org/3/account/${Account_id}/watchlist?session_id=${Session_ID}`;
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -99,6 +103,8 @@ export const updateWatchlist = async (movieId, newWatchlistStatus) => {
     throw error;
   }
 };
+
+
 // DetailService.js
 
 // ... (other imports and constants)
@@ -200,7 +206,7 @@ export const fetchTotalReviews = async (movieId) => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-export const fetchRatingStatus = async (movieId) => {
+export const fetchRatingStatus = async (movieId, Session_ID) => { /// session id 
   const options = {
     method: 'GET',
     headers: {
@@ -209,12 +215,12 @@ export const fetchRatingStatus = async (movieId) => {
     }
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
 
-export const updateRating = async (movieId, rating) => {
+export const updateRating = async (movieId, rating , Session_ID) => {///////////////////////////////////////////// session id
   const options = {
     method: 'POST',
     headers: {
@@ -225,12 +231,12 @@ export const updateRating = async (movieId, rating) => {
     body: JSON.stringify({ value: rating })
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
 
-export const removeRating = async (movieId) => {
+export const removeRating = async (movieId , Session_ID) => {/////////////////////////////////// session id 
   const options = {
     method: 'DELETE',
     headers: {
@@ -239,7 +245,7 @@ export const removeRating = async (movieId) => {
     }
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };

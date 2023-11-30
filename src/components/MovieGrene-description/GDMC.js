@@ -9,7 +9,7 @@ import MovieMedia from "../MovieBanner/Imdbcomponents/IMDBrating";
 import RatingModal from '../MovieBanner/Imdbcomponents/RatingModal';
 import Popularity from "../MovieBanner/Imdbcomponents/Popularity";
 
-const GDMC = ({movieId}) => {
+const GDMC = ({movieId, Session_ID}) => {
   const [movie, setMovie] = useState({
     title: '',
     year: '',
@@ -48,7 +48,7 @@ const GDMC = ({movieId}) => {
           totalRatings={movie.totalRatings} />
           </div>
           <div className="col-md-4">
-          <RatingModal movieTitle={movie.title}  movieId={movieId}/>
+          <RatingModal movieTitle={movie.title}  movieId={movieId} Session_ID={Session_ID}/>
 
           </div>
           <div className="col-md-4">
@@ -65,7 +65,7 @@ const GDMC = ({movieId}) => {
         </div>
         <div className="col-lg-2 movie-interaction-col">
           <div className="movie-interaction-row">
-            <WatchlistButton className="btn watchlist-btn" mediaId={movieId} />
+            <WatchlistButton className="btn watchlist-btn" mediaId={movieId} Session_ID={Session_ID} />
             <ReviewCounter className="review-counter" movieId={movieId} />
           </div>
         </div>

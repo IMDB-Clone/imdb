@@ -5,14 +5,14 @@ import "./PosterComponent.css";
 import ribbon from "../../assets/watchlist.png";
 import ribbonActive from "../../assets/watchlisted.png";
 
-function PosterComponent({ posterPath, movieId }) {
+function PosterComponent({ posterPath, movieId, Session_ID }) {
   const [ribbonImage, setRibbonImage] = useState(ribbon);
   const [isWatchlisted, setIsWatchlisted] = useState(false);
 
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const watchlisted = await fetchWatchlistStatus(movieId);
+        const watchlisted = await fetchWatchlistStatus(movieId, Session_ID);
         setIsWatchlisted(watchlisted);
         setRibbonImage(watchlisted ? ribbonActive : ribbon);
       } catch (err) {
@@ -21,12 +21,12 @@ function PosterComponent({ posterPath, movieId }) {
     };
 
     fetchStatus();
-  }, [movieId]);
+  }, [movieId, Session_ID]);
 
   const toggleRibbon = async () => {
     try {
       const newWatchlistStatus = !isWatchlisted;
-      await updateWatchlist(movieId, newWatchlistStatus);
+      await updateWatchlist(movieId, newWatchlistStatus , Session_ID);
       setIsWatchlisted(newWatchlistStatus);
       setRibbonImage(newWatchlistStatus ? ribbonActive : ribbon);
     } catch (err) {

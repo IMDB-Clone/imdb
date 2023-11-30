@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { updateWatchlist, fetchWatchlistStatus, fetchTotalReviews } from '../../services/DetailService';
 import './WatchlistButton.css';
 
-const WatchlistButton = ({ mediaId }) => {
+const WatchlistButton = ({ mediaId ,Session_ID }) => {
   
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [userCount, setUserCount] = useState(0);
@@ -10,7 +10,7 @@ const WatchlistButton = ({ mediaId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const watchlistStatus = await fetchWatchlistStatus(mediaId);
+        const watchlistStatus = await fetchWatchlistStatus(mediaId ,Session_ID);
         setIsInWatchlist(watchlistStatus);
 
         // Fetching total reviews count (assuming it returns the count of users who added it to watchlist)
@@ -22,11 +22,11 @@ const WatchlistButton = ({ mediaId }) => {
     };
 
     fetchData();
-  }, [mediaId]);
+  }, [mediaId,Session_ID]);
 
   const handleWatchlistUpdate = async () => {
     try {
-      const response = await updateWatchlist(mediaId, !isInWatchlist);
+      const response = await updateWatchlist(mediaId, !isInWatchlist, Session_ID);
       if (response.success) {
         setIsInWatchlist(current => !current); // Flip the isInWatchlist state
       } else {
