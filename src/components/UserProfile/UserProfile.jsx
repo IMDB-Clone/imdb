@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './UserProfile.css';
-import personImage from './Assets/person.png';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { UserContext } from '../usercontext';
+import { UserContext } from '../../services/usercontext';
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);

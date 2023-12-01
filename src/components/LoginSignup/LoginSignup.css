@@ -181,55 +181,79 @@ button[type="submit"] {
 }
 
 .signup-form {
-  width: 400px; 
-  margin: auto; 
-  padding: 15px; 
+  max-width: 90%; /* Use max-width for responsiveness and set to a percentage of the parent */
+  margin: auto 10px ; 
+  padding: 25px; /* Increased padding for better spacing */
+  
   background-color: #f9f9f9; 
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  overflow: hidden; 
+  border-radius: 10px; /* Slightly increased border-radius for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for a subtle 3D effect */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Updated font for a more modern look */
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out; /* Animation effect on load */
 }
 
+.signup-form:hover {
+  transform: translateY(-5px); /* Slight raise effect on hover for interactivity */
+}
 
 .signup-form input,
 .signup-form button {
-  width: 100%; 
-  padding: 8px; 
-  margin-bottom: 10px; 
-  box-sizing: border-box;
+  width: calc(100% - 16px); /* Calculated width to account for padding */
+  padding: 1px; /* Increased padding for a better touch area */
+  margin-bottom: 7px; /* Increased spacing for better separation of fields */
+  box-sizing: border-box; /* Ensures padding doesn't affect total width */
+  border: 1px solid #ddd; /* Subtle border for inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
 }
-
-
+.signup-form input[type="file"] {
+  /* Align the height with other text input fields */
+  height: 35px; /* Adjust this value as needed */
+}
 .signup-form label {
   display: block;
-  margin-bottom: 2px; 
-  font-size: 13px; 
-  color: #333;
+  margin-bottom: 2px; /* Increased margin for better visual separation from input */
+  font-size: 10px; /* Slightly larger font size for better readability */
+  color: #555; /* Softer color for the labels */
 }
-
 
 .signup-form button[type="submit"] {
-  background-color: #FFC72C; 
-  color: #0c0c0c;
-  padding: 10px; 
+  background-color: #ffc800; /* Changed to a more universally-accepted 'submit' color */
+  color: white; /* White text for better contrast and readability */
+  font-weight: bold; /* Bold font for the button text */
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
 }
 
+.signup-form button[type="submit"]:hover {
+  background-color:#ffc800; /* Darker shade on hover for button */
+}
 
 .signup-form .back-to-login-button {
-  background-color: #d3d3d3; 
-  color: #0c0c0c;
-  padding: 10px; 
+  background-color: #f1f1f1; /* Lighter background for secondary action */
+  color: #555; /* Darker text for contrast */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .top-icon {
-  display: none;
+  display: flex; /* Changed to flex to center the icon horizontally */
+  justify-content: center; /* Center the icon horizontally */
+  margin-bottom: 20px; /* Add some space between the icon and the form */
 }
 
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .signup-form {
+    max-width: 100%; /* Allow the form to take full width on small screens */
+    box-shadow: none; 
+    padding: 10px;/* Remove shadow on small screens for a flatter design */
+  }
+}
+.top-icon {
+  display: none;
+}

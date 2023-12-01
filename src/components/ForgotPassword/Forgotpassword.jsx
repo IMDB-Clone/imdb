@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import './Forgotpassword.css'; // Make sure the path is correct
+import './ForgotPassword.css'; // Make sure the path is correct
 
 export function Forgot() {
   const [email, setEmail] = useState('');
@@ -45,3 +45,4 @@ export function Forgot() {
     </div>
   );
 }
+export default Forgot;

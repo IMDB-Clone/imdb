@@ -1,24 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
-import google_icon from '../Assets/google.png';
-import facebook_icon from '../Assets/facebook.png';
-import IMDB_icon from '../Assets/IMDB.png';
+import google_icon from '../../assets/google.png';
+import facebook_icon from '../../assets/facebook.png';
+import IMDB_icon from '../../assets/IMDB.png';
 import './LoginSignup.css';
 import { useNavigate } from 'react-router-dom';
-import { auth, storage } from '../../firebase'; // Make sure 'storage' is imported here
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, storage } from '../../services/firebase'; 
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider,signInWithEmailAndPassword, createUserWithEmailAndPassword  } from 'firebase/auth';
 import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { UserContext } from '../../usercontext';
+import { UserContext } from '../../services/usercontext';
+console.log(UserContext);
 
 const LoginSignup = () => {
   const [active, setActive] = useState('login'); 
-  //const {setUser}=useContext(UserContext);
-  //const navigate = useNavigate();
   return (
     <div className="auth-container">
       <div className="top-icon">
-        <img src={IMDB_icon} alt="IMDB" />
+    <img src={IMDB_icon} alt="IMDB" />
       </div>
       <div className="auth-card">
         <div className="card-head">
@@ -33,30 +31,28 @@ const LoginSignup = () => {
     </div>
   );
 };
+
 const Login = ({ setActive }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage] = useState(''); 
-  //const db = getFirestore();
   const { setUser } = useContext(UserContext);
-
-   
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try { 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      console.log("userCredential: " + userCredential);
       const additionalData = await fetchUserDetails(userCredential.user.uid);
-      console.log(additionalData);
+      console.log("additionaldata "+additionalData);
       setUser({
         uid: userCredential.user.uid,
         email: userCredential.user.email,
       
         ...additionalData
       })
-      
-      
       console.log(userCredential.user);
       navigate('/profile');
     } catch (error) {
@@ -70,40 +66,62 @@ const Login = ({ setActive }) => {
   };
   const fetchUserDetails = async (uid) => {
     const db = getFirestore();
-    const docRef = doc(db, 'Users', uid); // Assuming 'users' is your collection
+    const docRef = doc(db, 'Users', uid); 
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        return docSnap.data(); // Returns the user details
+        return docSnap.data(); 
     } else {
         console.log('No such document!');
-        return null; // Handle the case where user details don't exist
+        return null; 
     }
 };
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
+  
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const googleUser = result.user;
+    const username = googleUser.displayName || ''; 
+    const db = getFirestore();
+    const userRef = doc(db, 'Users', googleUser.uid);
+    await setDoc(userRef, {
+      username: username, 
+      email: googleUser.email,
+      MemberSince: new Date(), 
+    }, { merge: true });
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    });
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log('Google sign-in successful, user:', result.user);
-      navigate('/home'); 
-    } catch (error) {
-      console.error('Error during Google sign-in', error);
-    }
-  };
-  const handleFacebookLogin = async () => {
-    const provider = new FacebookAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log('Facebook sign-in successful, user:', result.user);
-      navigate('/home'); 
-    } catch (error) {
-      console.error('Error during Facebook sign-in', error);
-    }
-  };
+    console.log('Google sign-in successful, user:', googleUser);
+    navigate('/home');
+  } catch (error) {
+    console.error('Error during Google sign-in', error);
+  }
+};
+
+const handleFacebookLogin = async () => {
+  const provider = new FacebookAuthProvider();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const facebookUser = result.user;
+    const username = facebookUser.displayName || ''; 
+    const db = getFirestore();
+    const userRef = doc(db, 'Users', facebookUser.uid);
+    await setDoc(userRef, {
+      name: username, 
+      email: facebookUser.email,
+      MemberSince: new Date(), 
+    }, { merge: true });
+    console.log('Facebook sign-in successful, user:', facebookUser);
+    navigate('/home');
+  } catch (error) {
+    console.error('Error during Facebook sign-in', error);
+  }
+};
+
   return (
     <div>
       <form onSubmit={handleLoginSubmit}>
@@ -162,7 +180,6 @@ const Signup = ({ setActive }) => {
     }
   };
   useEffect(() => {
-    // This function will be called for cleanup
     return () => {
       if (selectedFile) {
         URL.revokeObjectURL(selectedFile);
