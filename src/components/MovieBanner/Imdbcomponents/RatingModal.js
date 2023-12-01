@@ -87,7 +87,7 @@ const RatingModal = ({ movieTitle, movieId, Session_ID }) => {
             </button>
             <h3>Rate This</h3>
             <p>{movieTitle}</p>
-            <div className="star-rating">
+            <div className="star-rating1">
               {[...Array(10)].map((_, index) => (
                 <span
                   key={index}

@@ -353,3 +353,38 @@ export const fetchActorMovies = async (actorId) => {
     throw error; // Re-throw to handle it in the calling function
   }
 };
+export const fetchTrailers1 = async (movieId) => {
+  const url = `${API_BASE_URL}/movie/${movieId}/videos?language=en-US`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      ...fetchOptions,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const movieTrailers = await response.json();
+    console.log(movieTrailers);
+    return movieTrailers;
+  } catch (error) {
+    console.error("Error fetching movie trailers:", error);
+    throw error;
+  }
+};
+export const fetchReviewsFromDatabase = async (movieId) => {
+  const serverUrl = 'http://localhost:3001'; // Use your server's URL here
+  try {
+    const response = await fetch(`${serverUrl}/api/reviews/${movieId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    const reviews = await response.json(); // Parse the response as JSON directly
+    return reviews;
+  } catch (error) {
+    console.error('Failed to fetch reviews: ' + error.message);
+    throw error; // Re-throw to handle it in the calling component
+  }
+};
+

@@ -7,9 +7,8 @@ const fetchOptions = {
     Authorization: `Bearer ${API_KEY}`,
   },
 };
-
 export const fetchUpcomingMovies = async () => {
-  let response = await fetch(
+  const response = await fetch(
     `${API_BASE_URL}/movie/upcoming?language=en-US&page=1`,
     {
       method: "GET",
@@ -19,11 +18,11 @@ export const fetchUpcomingMovies = async () => {
 
   if (!response.ok) {
     throw new Error(
-      `HTTP error while fetching total pages! status: ${response.status}`
+      `HTTP error while fetching movies! status: ${response.status}`
     );
   }
 
-  let data = await response.json();
+  const data = await response.json();
 
   if (
     !data.results ||
@@ -32,40 +31,15 @@ export const fetchUpcomingMovies = async () => {
   ) {
     throw new Error("No upcoming movies found on the first page.");
   }
-  const totalPages = data.total_pages;
 
-  response = await fetch(
-    `${API_BASE_URL}/movie/upcoming?language=en-US&page=${totalPages}`,
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `HTTP error while fetching movies from the last page! status: ${response.status}`
-    );
-  }
-
-  data = await response.json();
-
-  if (!data.results || !Array.isArray(data.results)) {
-    throw new Error("No upcoming movies found on the last page.");
-  }
-
-  const moviesToReturn =
-    data.results.length >= 5 ? data.results.slice(-5) : data.results;
-
-  return moviesToReturn.reverse();
+  // Return the first 5 movies from page 1
+  return data.results.slice(0, 5);
 };
+
 
 export const fetchRecentlyAdded = async () => {
   let response = await fetch(
-    `${API_BASE_URL}/movie/now_playing?language=en-US&page=1?`,
+    `${API_BASE_URL}/movie/now_playing?language=en-US&page=1`,
     {
       method: "GET",
       ...fetchOptions,
@@ -85,34 +59,18 @@ export const fetchRecentlyAdded = async () => {
     !Array.isArray(data.results) ||
     data.results.length === 0
   ) {
-    throw new Error("No upcoming movies found on the first page.");
-  }
-  const totalPages = data.total_pages;
-
-  response = await fetch(
-    `${API_BASE_URL}/movie/now_playing?language=en-US&page=${totalPages}`,
-    {
-      method: "GET",
-      ...fetchOptions,
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `HTTP error while fetching movies from the last page! status: ${response.status}`
-    );
+    throw new Error("No now playing movies found on the first page.");
   }
 
-  data = await response.json();
-  if (!data.results || !Array.isArray(data.results)) {
-    throw new Error("No upcoming movies found on the last page.");
-  }
+  // Ensure we only return 5 movies by slicing the results
+  const startIndex = Math.max(0, data.results.length - 5);
+  const moviesToReturn = data.results.slice(startIndex, startIndex + 5);
 
-  const moviesToReturn =
-    data.results.length >= 5 ? data.results.slice(-5) : data.results;
+  console.log(moviesToReturn);
 
-  return moviesToReturn.reverse();
+  return moviesToReturn;
 };
+
 
 export const fetchPopularMovies = async () => {
   try {
@@ -174,10 +132,30 @@ export const fetchMovieDetails = async (movieId) => {
     }
 
     const movieDetails = await response.json();
-    console.log(movieDetails);
     return movieDetails;
   } catch (error) {
     console.error("Error fetching movie details:", error);
+    throw error;
+  }
+};
+
+export const fetchTrailers = async (movieId) => {
+  const url = `${API_BASE_URL}/movie/${movieId}/videos?language=en-US`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      ...fetchOptions,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const movieTrailers = await response.json();
+    console.log(movieTrailers);
+    return movieTrailers;
+  } catch (error) {
+    console.error("Error fetching movie trailers:", error);
     throw error;
   }
 };

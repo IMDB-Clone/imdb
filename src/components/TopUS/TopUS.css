@@ -74,6 +74,7 @@
   .top-us .movie-title {
     margin-bottom: 5px;
     color: white;
+    font-size: 1.2em !important;
   }
   
   .top-us .revenue {

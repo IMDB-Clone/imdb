@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+/*import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MovieDetailPage from "./containers/MovieDetailsPage/MovieDetailPage";
 import ActorDetails from "./components/movie cast/ActorDetails"; // Import ActorDetails component
 import MovieReviewing from "./containers/MovieReview/MovieReviewing"; // Import MovieReviewing component
@@ -15,11 +15,11 @@ const App = () => {
           <Route path="/" element={<MovieDetailPage movieId={movieId} Session_ID={Session_ID}/>} />
           <Route path="/actor/:actorId" element={<ActorDetails />} />
           <Route path="/movie-reviewing/:movieId" element={<MovieReviewing  movieId={movieId} Session_ID={Session_ID}/>} />      
-          {/* Add more routes as needed */}
+        
         </Routes>
       </div>
     </Router>
   );
 };
 
-export default App;
+export default App;*/

@@ -20,6 +20,7 @@ const RecentlyAdded = () => {
       try {
         const fetchedMovies = await fetchRecentlyAdded();
         setMovies(fetchedMovies);
+        console.log(fetchedMovies);
       } catch (error) {
         console.error("Failed to fetch movies:", error);
       }
