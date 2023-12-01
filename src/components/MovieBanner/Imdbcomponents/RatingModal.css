@@ -1,6 +1,6 @@
 /* RatingModal.css */
 
-.modal-overlay {
+.rating-modal-container .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     justify-content: center;
   }
   
-  .modal-content {
+  .rating-modal-container  .modal-content {
     background: #333; /* Dark background for the modal */
     padding: 20px;
     border-radius: 10px;
@@ -23,28 +23,28 @@
     position: relative; /* For absolute positioning of the close button */
   }
   
-  h3 {
+  .rating-modal-container  h3 {
     color: #fff;
     margin-bottom: 20px;
   }
   
-  .star-rating {
+  .rating-modal-container  .star-rating {
     color: #ccc; /* Default star color */
     font-size: 30px; /* Bigger stars */
   }
   
-  .star {
+  .rating-modal-container  .star {
     cursor: pointer;
     display: inline-block;
     margin: 0 10px; /* Spacing between stars */
   }
   
-  .star.filled {
+  .rating-modal-container  .star.filled {
     color: #ffac33; /* Gold color for filled stars */
   }
   
   /* General button styling */
-  .modal-content button {
+  .rating-modal-container  .modal-content button {
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
@@ -55,31 +55,31 @@
   }
   
   /* Submit button styling */
-  .rate-submit-button {
+  .rating-modal-container  .rate-submit-button {
     background: #aaa; /* Default color for the rate button */
     color: black;
   }
   
-  .rate-submit-button.gold {
+  .rating-modal-container  .rate-submit-button.gold {
     background: gold; /* Gold background when a star is selected */
     color: black;
   }
   
   /* Remove rating button styling */
-  .remove-rating {
+  .rating-modal-container   .remove-rating {
     background: #d9534f; /* Red background for removal */
     color: white;
   }
   
   /* Hover effects for buttons */
-  .modal-content button:hover,
-  .rate-submit-button:hover,
-  .remove-rating:hover {
+  .rating-modal-container  .modal-content button:hover,
+  .rating-modal-container  .rate-submit-button:hover,
+  .rating-modal-container  .remove-rating:hover {
     background-color: #777;
   }
   
   /* Close button (X) styling */
-  .close-modal {
+  .rating-modal-container  .close-modal {
     font-size: 30px;
     position: absolute;
     top: 10px;
@@ -91,7 +91,7 @@
   }
   
   /* Hover effect for the close button */
-  .close-modal:hover {
+  .rating-modal-container  .close-modal:hover {
     color: #bbb;
   }
   

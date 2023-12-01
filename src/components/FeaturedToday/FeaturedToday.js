@@ -1,12 +1,12 @@
 // FeaturedToday component
 import React, { useState, useEffect } from 'react';
-import { fetchPopularMovies, fetchMovieDetails } from '../../services/movieService';
+import { fetchPopularMovies } from '../../services/movieService';
 import ReviewPopup from '../ReviewPopup/ReviewPopup'; 
 import './FeaturedToday.css';
 
 const FeaturedToday = () => {
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovie] = useState(null);
   const [isReviewPopupOpen, setIsReviewPopupOpen] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const FeaturedToday = () => {
       <div className="movies-container">
         {movies.map((movie) => (
           <a
-            href={`/movie/${movie.id}`}
+            href={`/movie-details/${movie.id}`}
             key={movie.id}
             className="movie-item"
           >

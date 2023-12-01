@@ -12,7 +12,7 @@
   
   }
   
-  .rating-button.rated {
+  .rating-button .rated {
     color: #ffd700; /* Gold color for rated state */
   }
   
@@ -20,11 +20,11 @@
     color: #ffffff; /* White color on hover */
   }
   
-  .star {
+  .rating-button  .star {
     margin-right: 5px; /* Space between star and text */
   }
   
-  .button-label {
+  .rating-button  .button-label {
     font-weight: bold;
   }
   

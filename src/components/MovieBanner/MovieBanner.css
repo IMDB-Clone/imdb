@@ -8,7 +8,7 @@
 
 /* Responsive layout for the inner container */
 @media (min-width: 768px) {
-  .movie-banner-container {
+  .movie-banner .movie-banner-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +17,7 @@
 
 /* Styling adjustments for smaller screens */
 @media (max-width: 767px) {
-  .movie-banner-container {
+  .movie-banner .movie-banner-container {
     flex-direction: column;
   }
 }

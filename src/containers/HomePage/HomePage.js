@@ -11,7 +11,7 @@ const HomePage = () => {
     <div className="home-page">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-8 col-md-12">
+          <div className="col-lg-8 col-md-12 d-block">
             <RecentlyAdded />
             <div className="row">
               <div className="col-12">

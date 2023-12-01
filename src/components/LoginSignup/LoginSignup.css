@@ -1,10 +1,10 @@
 
-.icon {
+.auth-container .icon {
   width: 40px; /* Adjust the size as needed */
   height: auto;
 }
 
-.top-icon {
+.auth-container .top-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@
   z-index: 2;
 }
 
-.auth-container {
+.auth-container .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@
   position: relative;
 }
 
-.top-icon img {
+.auth-container .top-icon img {
   width: 70px; /* Set the width of the image */
   height: auto; /* Maintain aspect ratio */
   display: block; /* Ensures the image doesn't interact with other elements */
@@ -30,7 +30,7 @@
   margin-top: 10px;
 }
 
-.auth-card {
+.auth-container .auth-card {
   width: 400px;
   padding: 10px;
   background-color: #fff;
@@ -40,7 +40,7 @@
   position: relative; /* Maintain stacking context */
   z-index: 1; /* Ensure the white card is above the icon */
 }
-.card-head {
+.auth-container .card-head {
   display: flex;
   justify-content: space-between;
   margin-bottom:-4px;
@@ -48,79 +48,79 @@
 
 }
 
-.card-head h3 {
+.auth-container .card-head h3 {
   cursor: pointer;
   padding-bottom: 0px;
   color: #000; /* Adjust text color to IMDb's design */
 }
 
-.card-head .active {
+.auth-container .auth-container .card-head .active {
   border-bottom: 2px solid #000; /* Active tab underline color */
 }
 
-.form-section {
+.auth-container .form-section {
   display: flex;
   flex-direction: column;
 }
 
-form {
+.auth-container form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* Add space between forms */
 }
 
-label {
+.auth-container label {
   margin-bottom: 5px; /* Add space below each label */
 }
 
-input {
+.auth-container input {
   margin-bottom: 10px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
 }
-.aux-options {
+.auth-container .aux-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.remember-me {
+.auth-container .remember-me {
   display: flex;
   align-items: center;
   font-weight: bold;
   color: #666; /* Adjust color to IMDb's design */
 }
 
-label[for="email"],
-label[for="password"] {
+.auth-container label[for="email"],
+.auth-container label[for="password"] {
   font-weight: bold;
 }
 
-input#email,
-input#password {
+.auth-container input#email,
+.auth-container input#password {
   border: 1px solid black;
 }
 
 
-.remember-me input[type="checkbox"] {
+.auth-container .remember-me input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.forgot-password {
+.auth-container .forgot-password {
   cursor: pointer;
   margin-top: 10px; /* Adjust as needed to place it on the same line */
 }
 
-.forgotPasswordButton {
+.auth-container .forgotPasswordButton {
   background-color: white;
   color: #0071eb;
   border: none;
   padding: 0;
 }
-button[type="submit"] {
+.auth-container button[type="submit"] {
   background-color: #FFC72C;
   padding: 12px 24px;
   border: none;
@@ -128,19 +128,19 @@ button[type="submit"] {
   margin-top: 10px; /* Adjust margin as needed */
   cursor: pointer;
 }
-.social-login {
+.auth-container .social-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.social-login p {
+.auth-container .social-login p {
   margin-bottom: 10px;
   color: #000; /* Text color */
 }
 
-.social-login .social-button {
+.auth-container .social-login .social-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,11 +155,11 @@ button[type="submit"] {
   text-transform: none;
 }
 
-.social-login .social-button img {
+.auth-container .social-login .social-button img {
   width: 20px;
   margin-right: 8px;
 }
-h4{
+.auth-container h4{
   color: black;
   background-color: white;
   border: 2px solid lightgray;

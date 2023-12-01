@@ -1,42 +1,42 @@
 /* MovieYearTitleComponent.css */
-.movie-card {
+.movie-card-review {
     display: flex;
     align-items: center;
     font-family: Arial, sans-serif;
 }
 
-.movie-image img {
+.movie-card-review .movie-image img {
     width: 100px; /* Adjust as needed */
     height: auto;
     border-radius: 4px;
     margin-right: 20px;
 }
 
-.movie-info {
+.movie-card-review .movie-info {
     display: flex;
     flex-direction: column;
 }
 
-.movie-title {
+.movie-card-review .movie-title {
     margin: 0;
     font-size: 24px; /* Adjust as needed */
     color: #333;
 }
 
-.movie-year {
+.movie-card-review .movie-year {
     font-size: 20px; /* Adjust as needed */
     color: #666;
     margin-bottom: 10px;
 }
 
-.review-link {
+.movie-card-review .review-link {
     font-size: 16px; /* Adjust as needed */
     color: #007bff;
     text-decoration: none;
     cursor: pointer;
 }
 
-.review-link:hover {
+.movie-card-review .review-link:hover {
     text-decoration: underline;
 }
 

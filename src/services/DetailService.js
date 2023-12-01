@@ -1,20 +1,20 @@
 // DetaileService.js
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
-const BEARER_TOKEN = process.env.REACT_APP_ACCESS_TOKEN; // Replace with actual token
+// const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
+const BEARER_TOKEN = process.env.REACT_APP_TMDB_AUTH_KEY; // Replace with actual token
 
 const fetchOptions = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}` // Make sure this token is valid
+    Authorization: `Bearer ${BEARER_TOKEN}` // Make sure this token is valid
   }
 };
 
 export const fetchMovieDetails = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/movie/${movieId}?language=en-US`;
     const response = await fetch(url, fetchOptions);
     
     if (!response.ok) {
@@ -31,7 +31,7 @@ export const fetchMovieDetails = async (movieId) => {
 
 export const fetchMovieTrailers = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/movie/${movieId}/videos?language=en-US`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -52,13 +52,7 @@ export const fetchMovieTrailers = async (movieId) => {
 
 export const fetchWatchlistStatus = async (movieId) => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/account_states`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
-      }
-    });
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/account_states`, fetchOptions);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -79,7 +73,7 @@ export const updateWatchlist = async (movieId, newWatchlistStatus) => {
       headers: {
         accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+        Authorization: `Bearer ${BEARER_TOKEN}`
       },
       body: JSON.stringify({
         media_type: "movie",
@@ -130,7 +124,7 @@ export const fetchMovieCredits = async (movieId) => {
 
 export const fetchGenresAndOverview = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/movie/${movieId}?language=en-US`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -153,7 +147,7 @@ export const fetchGenresAndOverview = async (movieId) => {
 
 export const fetchMovieData = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/movie/${movieId}?language=en-US`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -183,7 +177,7 @@ export const fetchMovieData = async (movieId) => {
 
 export const fetchTotalReviews = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`;
+    const url = `${API_BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -201,15 +195,8 @@ export const fetchTotalReviews = async (movieId) => {
 
 
 export const fetchRatingStatus = async (movieId) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${BEARER_TOKEN}`
-    }
-  };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?`, fetchOptions);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
@@ -225,7 +212,7 @@ export const updateRating = async (movieId, rating) => {
     body: JSON.stringify({ value: rating })
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
@@ -239,23 +226,17 @@ export const removeRating = async (movieId) => {
     }
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
 
 export const fetchTotalReview = async (movieId) => {
   try {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${BEARER_TOKEN}` // Replace with your actual API token
-      }
-    };
+
 
     const url = `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`;
-    const response = await fetch(url, options);
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -274,7 +255,7 @@ export const fetchTotalReview = async (movieId) => {
 // Add this function to fetch similar movies
 export const fetchSimilarMovies = async (movieId) => {
   try {
-    const url = `${API_BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`;
+    const url = `${API_BASE_URL}/movie/${movieId}/similar?language=en-US&page=1`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -291,16 +272,9 @@ export const fetchSimilarMovies = async (movieId) => {
 
 // DetailService.js
 const getMovieCast = async (movieId) => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${BEARER_TOKEN}`
-    }
-  };
 
   try {
-    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/credits?language=en-US`, options);
+    const response = await fetch(`${API_BASE_URL}/movie/${movieId}/credits?language=en-US`, fetchOptions);
     const data = await response.json();
     return data.cast.slice(0, 10); // Only returning the first 18 cast members
   } catch (error) {
@@ -316,7 +290,7 @@ export default getMovieCast;
 
 export const fetchActorDetails = async (actorId) => {
   try {
-    const url = `${API_BASE_URL}/person/${actorId}?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/person/${actorId}?language=en-US`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -333,7 +307,7 @@ export const fetchActorDetails = async (actorId) => {
 
 export const fetchActorMovies = async (actorId) => {
   try {
-    const url = `${API_BASE_URL}/person/${actorId}/movie_credits?api_key=${API_KEY}&language=en-US`;
+    const url = `${API_BASE_URL}/person/${actorId}/movie_credits?&language=en-US`;
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {

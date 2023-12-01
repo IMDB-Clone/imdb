@@ -5,38 +5,38 @@
   padding-top: 8px;
 }
 
-.popularity-icon {
+.popularity-container .popularity-icon {
   margin-right: 5px;
   /* Set the size of the icon to match the image */
   width: 20px;
   height: 20px;
 }
 
-.popularity-value {
+.popularity-container .popularity-value {
   /* Style for the popularity number */
   font-size: 1.5em; /* Adjust font-size to match the image */
   font-weight: bold;
 }
 
 /* Adjust the size and spacing for the MovieMedia component to match the first image */
-.movie-media-rating {
+.popularity-container .movie-media-rating {
   display: flex;
   align-items: center;
 }
 
-.movie-media-star {
+.popularity-container .movie-media-star {
   color: #ffd700; /* Color for the star */
   font-size: 2em; /* Adjust to the size of the star in the image */
   margin-right: 5px;
 }
 
-.movie-media-rating-value {
+.popularity-container .movie-media-rating-value {
   font-size: 2em; /* Adjust to match the size of the rating in the image */
   font-weight: bold;
   color: white;
 }
 
-.movie-media-total-ratings {
+.popularity-container .movie-media-total-ratings {
   font-size: 0.75em; /* Adjust to match the size of the total ratings in the image */
   color: #aaa; /* Adjust to a lighter shade */
 }

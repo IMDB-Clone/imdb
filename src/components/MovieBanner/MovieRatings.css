@@ -1,38 +1,38 @@
 /* MovieRatings.css */
-.movie-ratings {
+.movie-ratings-container .movie-ratings {
     text-align: center;
   }
   
-  .rating-label {
+  .movie-ratings-container  .rating-label {
     font-weight: bold;
     margin-bottom: 0.5rem;
   }
   
-  .rating-star, .popularity-icon {
+  .movie-ratings-container  .rating-star, .movie-ratings-container .popularity-icon {
     color: #ffc107; /* Gold color for the star and fire icon */
     margin-right: 0.25rem;
   }
   
-  .rating-value, .rating-count, .popularity-value {
+  .movie-ratings-container  .rating-value, .movie-ratings-container  .rating-count,.movie-ratings-container  .popularity-value {
     font-size: 1rem;
     color: #fff; /* White color for text */
   }
   
   
   /* This is the default style that will apply to screens larger than 767px */
-.movie-ratings-row .row .col-md-4 {
+  .movie-ratings-container .movie-ratings-row .row .col-md-4 {
    display:none;
 }
 
 @media (max-width: 767px) {
-  .movie-ratings-row .row .col-md-4 {
+  .movie-ratings-container .movie-ratings-row .row .col-md-4 {
     /* Adjust the column layout for smaller screens */
     display: flex; /* Keep them in a flexbox */
     flex-basis: 33.3333%; /* Each takes up one-third of the row */
     max-width: 33.3333%; /* Maximum width set to one-third of the row */
   }
 
-  .movie-ratings-row .row {
+  .movie-ratings-container  .movie-ratings-row .row {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next line if space runs out */
     justify-content: space-between; /* Distribute space between items */

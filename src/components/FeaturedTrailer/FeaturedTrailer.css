@@ -3,7 +3,7 @@
     color: #fff; /* Text color */
   }
   
-  h2 {
+ .featured-trailer h2 {
     font-size: 1.5rem; /* Adjust the font size for the title */
     margin-bottom: 1rem;
   }

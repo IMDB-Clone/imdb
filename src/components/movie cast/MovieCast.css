@@ -2,7 +2,7 @@
     font-family: 'Arial', sans-serif;
   }
   
-  .cast-title {
+  .movie-cast-container .cast-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -12,39 +12,39 @@
     padding-bottom: 5px;
   }
   
-  .cast-grid {
+  .movie-cast-container .cast-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
   
-  .cast-member {
+  .movie-cast-container  .cast-member {
     display: flex;
     align-items: center;
     gap: 15px;
   }
   
-  .cast-photo {
+  .movie-cast-container  .cast-photo {
     border-radius: 50%;
     width: 100px;
     height: 100px;
     object-fit: cover;
   }
   
-  .cast-name {
+  .movie-cast-container .cast-name {
     margin: 0;
     font-size: 18px;
     font-weight: bold;
     color: #333;
   }
   
-  .cast-character {
+  .movie-cast-container  .cast-character {
     margin: 0;
     font-size: 14px;
     color: #555;
   }
   /* MovieCast.css */
-.movie-cast-container {
+  .movie-cast-container .movie-cast-container {
   background-color: white;
   padding: 20px;
   /* other styles */

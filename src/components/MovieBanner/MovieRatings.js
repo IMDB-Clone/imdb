@@ -8,7 +8,7 @@ import "./MovieRatings.css";
 const MovieRatings = ({ movie , movieId}) => {
  
   return (
-    <div className="col-md-4 d-none d-md-block">
+    <div className="col-md-4 d-none d-md-block movie-ratings-container">
       <div className="d-flex justify-content-around align-items-center">
         <div className="row">
           <div className="col-md-4">

@@ -1,10 +1,10 @@
-.movie-container {
+.movie-container-gdmc {
     /* Styling for the container */
     display: flex;
     flex-direction: row;
   }
   
-  .movie-details-col {
+ .movie-container-gdmc  .movie-details-col {
     /* Styling for the left column */
     color: #fff; /* Example text color */
     display: flex;
@@ -14,19 +14,19 @@
 
 
   }
-  .container-fluid.movie-container {
+  .movie-container-gdmc .container-fluid .movie-container-gdmc {
     margin-left: 3%;
 }
 
   
-  .movie-credits-row, .movie-genres-row {
+ .movie-container-gdmc  .movie-credits-row, .movie-container-gdmc .movie-genres-row {
     /* To make sure the credits and genres are on the same line */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; /* This will wrap the content to the next line if it doesn't fit */
   }
   
-  .movie-interaction-col {
+ .movie-container-gdmc  .movie-interaction-col {
     /* Styling for the right column */
     display: flex;
     flex-direction: column;
@@ -34,13 +34,13 @@
     padding: 1rem;
   }
   
-  .movie-interaction-row {
+ .movie-container-gdmc  .movie-interaction-row {
     /* To make sure the button and counters are centered */
     text-align: center; /* Center text for smaller elements */
 
   }
   
-  .watchlist-btn {
+ .movie-container-gdmc  .watchlist-btn {
     background-color: #f5c518; /* Example button color */
     border: none;
     color: #000; /* Text color */

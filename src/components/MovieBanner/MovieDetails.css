@@ -1,11 +1,11 @@
 /* MovieDetails.css */
-.movie-title {
+.movie-details-container .movie-title {
  /* Example size, adjust as needed */
     margin-bottom: 0.5rem;
     
   }
   
-  .movie-info {
+ .movie-details-container .movie-info {
     font-size: 1rem;
     color: #ccc; /* Lighter text color for info */
     font-style: italic;

@@ -6,7 +6,11 @@ import GDMC from "../../components/MovieGrene-description/GDMC";
 import Footer from "../../components/Footer/Footer";
 import MovieCast from "../../components/movie cast/MovieCast";
 import "./MovieDetailPage.css";
-const MovieDetailPage = ({ movieId }) => {
+import { useParams } from 'react-router-dom';
+
+const MovieDetailPage = () => {
+
+  const { movieId } = useParams();
   
     return (
       <div className="movie-section-background">

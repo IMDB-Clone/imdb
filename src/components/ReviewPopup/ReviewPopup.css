@@ -83,18 +83,18 @@ padding:0px;
   
 
 /* Star rating wrapper styling */
-.star-rating {
+.review-popup-container .star-rating {
   display: inline-block;
   font-size: 0; /* to eliminate whitespace from inline-block */
 }
 
 /* Hide the radio buttons */
-.star-rating input[type="radio"] {
+.review-popup-container .star-rating input[type="radio"] {
   display: none;
 }
 
 /* Style the labels (stars) */
-.star-rating label {
+.review-popup-container .star-rating label {
   font-size: 24px; /* Size of the stars */
   color: #ccc; /* Color of the stars */
   cursor: pointer;
@@ -102,33 +102,33 @@ padding:0px;
 }
 
 /* Style the stars on hover and when checked */
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input[type="radio"]:checked ~ label {
+.review-popup-container .star-rating label:hover,
+.review-popup-container .star-rating label:hover ~ label,
+.review-popup-container .star-rating input[type="radio"]:checked ~ label {
   color: #ffc107; /* Color of active stars */
 }
 
 /* Reverse the order of the labels to correctly display the stars */
-.star-rating {
+.review-popup-container .star-rating {
   direction: rtl; /* This reverses the order of the inline elements */
 }
 
-.star-rating label {
+.review-popup-container .star-rating label {
   direction: ltr; /* This ensures the stars themselves are not reversed */
 }
 
 /* Optional: Add some space between the stars */
-.star-rating label:not(:last-child) {
+.review-popup-container .star-rating label:not(:last-child) {
   margin-right: 5px;
 }
 
-.submit-btn{
+.review-popup-container .submit-btn{
     background-color: white !important;
     border-color: lightgray !important;
     color: gray !important;
 }
 
-.submit-btn:hover{
+.review-popup-container .submit-btn:hover{
     background-color: lightgray !important;
     border-color: white !important;
 }

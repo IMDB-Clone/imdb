@@ -73,7 +73,7 @@ const RatingModal = ({ movieTitle, movieId }) => {
   const closeModal = () => setShowModal(false);
 
   return (
-    <>
+    <div className="rating-modal-container">
       <RatingButton onClick={openModal} rating={rating} hasRated={hasRated} />
       {showModal && (
         <div className="modal-overlay">
@@ -119,7 +119,7 @@ const RatingModal = ({ movieTitle, movieId }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

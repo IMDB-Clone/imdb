@@ -24,7 +24,7 @@ const MovieYearTitleComponent = ({ movieId }) => {
     }, [movieId]);
 
     return (
-        <div className="movie-card">
+        <div className="movie-card-review">
             <div className="movie-image">
                 <img src={`https://image.tmdb.org/t/p/w500/${posterPath}`} alt={`${title} Poster`} />
             </div>

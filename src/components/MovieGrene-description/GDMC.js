@@ -35,7 +35,7 @@ const GDMC = ({movieId}) => {
   }, [movieId]);
 
   return (
-    <div className="container-fluid movie-container">
+    <div className="container-fluid movie-container-gdmc">
       <div className="row">
         <div className="col-lg-9 movie-details-col">
           <div className="movie-genres-row">

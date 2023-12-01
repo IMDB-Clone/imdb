@@ -1,5 +1,5 @@
 
-.review-card {
+.movie-reviews-container .review-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -8,56 +8,56 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.review-header {
+.movie-reviews-container .review-header {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.review-rating {
+.movie-reviews-container .review-rating {
     font-size: 24px;
     font-weight: bold;
     color: #f5c518; /* Gold color for the stars */
     margin-right: 10px;
 }
 
-.review-author {
+.movie-reviews-container .review-author {
     font-size: 14px;
     color: #333;
 }
 
-.review-date {
+.movie-reviews-container .review-date {
     font-size: 14px;
     color: #767676;
     margin-left: auto; /* Pushes the date to the right */
 }
 
-.review-content {
+.movie-reviews-container .review-content {
     font-size: 14px;
     color: #333;
     line-height: 1.5;
 }
 
-.review-helpful {
+.movie-reviews-container .review-helpful {
     font-size: 14px;
     color: #333;
     display: flex;
     align-items: center;
 }
 
-.helpful-button {
+.movie-reviews-container .helpful-button {
     margin-right: 5px;
     cursor: pointer;
 }
 
-.sort-select {
+.movie-reviews-container .sort-select {
     position: relative;
     display: inline-block;
     margin: 10px;
     font-size: 16px; /* Set the font-size here to ensure consistency */
 }
 
-.sort-select select {
+.movie-reviews-container .sort-select select {
     display: inline-block;
     width: auto; /* Adjust width as needed, or set a specific width */
     cursor: pointer;
@@ -72,7 +72,7 @@
     position: relative; /* Ensures the text doesn't overlap the pseudo-element */
 }
 
-.sort-select:after {
+.movie-reviews-container .sort-select:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -85,14 +85,14 @@
 }
 
 /* Hides the default arrow in Internet Explorer 10/11 */
-.sort-select select::-ms-expand {
+.movie-reviews-container .sort-select select::-ms-expand {
     display: none;
 }
 
-.sort-select select:hover {
+.movie-reviews-container .sort-select select:hover {
     border-color: #bbb;
 }
 
-.sort-select select:focus {
+.movie-reviews-container .sort-select select:focus {
     border-color: #777;
 }

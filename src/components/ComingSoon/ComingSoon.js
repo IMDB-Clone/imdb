@@ -34,7 +34,7 @@ const ComingSoon = () => {
   }
 
   const handleMovieClick = (movieId) => {
-    navigate(`/movie/${movieId}`);
+    navigate(`/movie-trailers/${movieId}`);
   };
 
   const handleMouseEnter = (movieId) => {

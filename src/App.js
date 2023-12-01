@@ -6,7 +6,7 @@ import TermsAndConditions from './containers/TermsAndConditions/TermsAndConditio
 import PrivacyPolicy from './containers/PrivacyPolicy/PrivacyPolicy';
 import HomePage from './containers/HomePage/HomePage';
 import MovieTrailersPage from './containers/MovieTrailersPage/MovieTrailersPage';
-
+import MovieReviewing from './containers/MovieReview/MovieReviewing'; 
 
 const App = () => {
     return (
@@ -15,9 +15,10 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/movie/:movieId" element={<MovieTrailersPage />} />
-                {/* <Route path="/" element={<MovieDetailPage movieId={movieId} />} /> */}
+                <Route path="/movie-trailers/:movieId" element={<MovieTrailersPage />} />
+                <Route path="/movie-details/:movieId" element={<MovieDetailPage/>} />
                 <Route path="/actor/:actorId" element={<ActorDetails />} />
+                <Route path="/movie-review/:movieId" element={<MovieReviewing />} />
             </Routes>
         </Router>
     );
