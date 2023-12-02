@@ -26,10 +26,8 @@ export const createRequestToken = async () => {
 
 // Function to create a new session ID with an authorized request token
 export const createSessionId = async (authorizedRequestToken) => {
-console.log("trying to create session id...");
   const url = `${API_BASE_URL}/authentication/session/new`;
   const options = {
-    ...fetchOptions,
     method: "POST",
     headers: {
       ...fetchOptions.headers,
@@ -41,13 +39,9 @@ console.log("trying to create session id...");
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    throw new Error(
-      `HTTP error while creating session ID! status: ${response.status}`
-    );
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-
   const data = await response.json();
-  console.log("endpoint's created session id: "+ data.session_id);
   return data.session_id;
 };
