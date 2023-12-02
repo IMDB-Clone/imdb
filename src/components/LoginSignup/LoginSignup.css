@@ -1,10 +1,9 @@
-
-.auth-container .icon {
-  width: 40px; /* Adjust the size as needed */
+.icon {
+  width: 40px;
   height: auto;
 }
 
-.auth-container .top-icon {
+.top-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +13,7 @@
   z-index: 2;
 }
 
-.auth-container .auth-container {
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,125 +21,131 @@
   position: relative;
 }
 
-.auth-container .top-icon img {
-  width: 70px; /* Set the width of the image */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Ensures the image doesn't interact with other elements */
-  margin-bottom: 20px ;
-  margin-top: 10px;
+.top-icon img {
+  max-width: 100px;
+  margin-bottom: 10px;
 }
 
-.auth-container .auth-card {
-  width: 400px;
+.auth-container h2 {
+  text-align: center;
+  color: #0c0c0c;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.auth-card {
+  width: 350px;
   padding: 10px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   font-family: Arial, sans-serif;
-  position: relative; /* Maintain stacking context */
-  z-index: 1; /* Ensure the white card is above the icon */
+  position: relative;
+  z-index: 1;
 }
-.auth-container .card-head {
+
+.card-head {
   display: flex;
   justify-content: space-between;
-  margin-bottom:-4px;
+  margin-bottom: -4px;
   margin-top: 10px;
-
 }
 
-.auth-container .card-head h3 {
+.card-head h3, .card-head h4 {
   cursor: pointer;
   padding-bottom: 0px;
-  color: #000; /* Adjust text color to IMDb's design */
+  color: #000;
 }
 
-.auth-container .auth-container .card-head .active {
-  border-bottom: 2px solid #000; /* Active tab underline color */
+.card-head .active {
+  border-bottom: 2px solid #000;
 }
 
-.auth-container .form-section {
+.form-section {
   display: flex;
   flex-direction: column;
 }
 
-.auth-container form {
+form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; /* Add space between forms */
+  margin-bottom: 20px;
 }
 
-.auth-container label {
-  margin-bottom: 5px; /* Add space below each label */
+label {
+  margin-bottom: 10px;
 }
 
-.auth-container input {
+input {
   margin-bottom: 10px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
 }
-.auth-container .aux-options {
+
+.aux-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.auth-container .remember-me {
+.remember-me {
   display: flex;
   align-items: center;
   font-weight: bold;
-  color: #666; /* Adjust color to IMDb's design */
+  color: #666;
 }
 
-.auth-container label[for="email"],
-.auth-container label[for="password"] {
+label[for="email"],
+label[for="password"] {
   font-weight: bold;
 }
 
-.auth-container input#email,
-.auth-container input#password {
+input#email,
+input#password {
   border: 1px solid black;
 }
 
-
-.auth-container .remember-me input[type="checkbox"] {
+.remember-me input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.auth-container .forgot-password {
+.forgot-password {
   cursor: pointer;
-  margin-top: 10px; /* Adjust as needed to place it on the same line */
+  margin-top: 10px;
 }
 
-.auth-container .forgotPasswordButton {
+.forgotPasswordButton {
   background-color: white;
   color: #0071eb;
   border: none;
   padding: 0;
 }
-.auth-container button[type="submit"] {
+
+button[type="submit"] {
   background-color: #FFC72C;
   padding: 12px 24px;
   border: none;
   border-radius: 4px;
-  margin-top: 10px; /* Adjust margin as needed */
+  margin-top: 10px;
   cursor: pointer;
 }
-.auth-container .social-login {
+
+.social-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.auth-container .social-login p {
+.social-login p {
   margin-bottom: 10px;
-  color: #000; /* Text color */
+  color: #000;
 }
 
-.auth-container .social-login .social-button {
+.social-login .social-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,18 +157,114 @@
   cursor: pointer;
   background-color: #f5f5f5;
   color: #000;
-  text-transform: none;
 }
 
-.auth-container .social-login .social-button img {
+.social-login .social-button img {
   width: 20px;
   margin-right: 8px;
 }
-.auth-container h4{
-  color: black;
-  background-color: white;
-  border: 2px solid lightgray;
+
+.auth-container button {
+  width: 100%;
   padding: 10px;
-  border-radius: 10px;
-  text-align: center;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffc800;
+  color: #0c0c0c;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
 }
+
+.auth-container button:hover {
+  background-color: #e6b800;
+}
+
+.signup-form {
+  max-width: 400px; 
+  margin: 20px auto; 
+  padding: 15px; 
+
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.signup-form:hover {
+  transform: translateY(-5px);
+}
+
+
+.signup-form input,
+.signup-form button {
+  width: 100%; 
+  padding: 2px; 
+  margin-bottom: 10px; 
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+.signup-form input[type="file"] {
+  height: 40px;
+}
+
+
+.signup-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px; 
+  color: #555;
+}
+
+
+.signup-form button[type="submit"] {
+  background-color: #ffc800;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-form button[type="submit"]:hover {
+  background-color: #e6b800;
+}
+
+
+.signup-form .back-to-login-button {
+  background-color: #f1f1f1;
+  color: #555;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+@media (max-width: 480px) {
+  .signup-form {
+      max-width: 100%;
+      margin: 8px;
+      padding: 10px;
+  }
+
+  .signup-form label {
+      font-size: 12px; 
+  }
+}
+
+.top-icon {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .auth-card {
+      width: 80%; 
+      padding: 20px;
+  }}

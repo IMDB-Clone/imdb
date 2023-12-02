@@ -1,47 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import './UserProfile.css'; // Make sure the path is correct
-import personImage from './Assets/person.png';
-
-// Inside UserProfile component
+import React, { useState, useEffect, useContext } from 'react';
+import './UserProfile.css';
+import { getFirestore, doc, getDoc,updateDoc } from 'firebase/firestore';
+import { UserContext } from '../../services/usercontext';
 const UserProfile = () => {
-    const { userId } = useParams(); // This is the correct place to call useParams
-    const [profile, setProfile] = useState({
-      username: '',
-      gender: '',
-      dateOfBirth: '',
-      country: '',
-      photoUrl: personImage, // Assuming this image exists in your assets folder
-      ratings: [], // Array of ratings
-      topPicks: [], // Array of top picks
-      reviews: [] // Array of last 5 reviews
-    });
-
-    useEffect(() => {
-        // Replace with actual user ID, possibly from route params
-      
-        fetch(`http://localhost:3001/api/users/${userId}`) // Adjust the URL as per your backend API
-          .then(response => response.json())
-          .then(data => setProfile(data))
-          .catch(error => console.error('Error fetching user data:', error));
-      }, [userId]);
-
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  const [isEditing, setIsEditing] = useState(false);
+  const {user}=useContext(UserContext);
+  console.log(user);
+  const [profile, setProfile] = useState({
+    username: '',
+    name: '',
+    gender: '',
+    dateOfBirth: '',
+    country: '',
+    MemberSince: '',
+    ratings: [],
+    topPicks: [],
+    reviews: [],
+    email: '',
+    photoURL: null,
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const db = getFirestore();
+      const docRef = doc(db, 'users', user.uid);
+      try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          
+          console.log('Fetched user data:', userData);
+          const bdate = userData.dateofbirth.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const joindate = userData.MemberSince.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          console.log("bdate",bdate);
+          console.log("joindate",joindate);
+          console.log(userData.photoURL);
+          setProfile((prevProfile) => ({
+            ...prevProfile,
+            username: userData.username || '',
+            name: userData.Name || '',
+            gender: userData.Gender || '',
+            dateOfBirth: bdate || '',
+            country: userData.Country || '',
+            MemberSince:userData.MemberSince || '',
+            ratings: userData.Ratings || [],
+            topPicks: userData['Top picks'] || [],
+            reviews: userData.Reviews || [],
+            email: userData.email || '',
+            photoURL: userData.photoURL || '',
+          }));
+        } else {
+          console.log('Document not found');
+        }
+      } catch (error) {
+        console.error('Error getting user document:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value,
+    }));
   };
+  const handleEditClick = () => {
+  setIsEditing(true);
+};
+
+const handleSave = async () => {
+  const db = getFirestore();
+  const userRef = doc(db, 'users', user.uid);
+  try {
+    await updateDoc(userRef, {
+      ...profile, // spread the updated profile data
+      // Convert date strings back to Firestore Timestamp if needed
+      // dateOfBirth: Timestamp.fromDate(new Date(profile.dateOfBirth)),
+      // MemberSince: Timestamp.fromDate(new Date(profile.MemberSince)),
+    });
+    console.log('Profile updated successfully');
+    setIsEditing(false); // Exit edit mode after saving
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    setIsEditing(false); // Exit edit mode after error
+  }
+};
+  if (isEditing) {
+    return (
+      <div className="user-profile">
+        <div className="edit-form">
+          <h2>Edit Profile</h2>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" value={profile.name} onChange={handleChange} />
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={profile.email} onChange={handleChange} />
+          <label htmlFor="gender">Gender:</label>
+          <input type="text" id="gender" name="gender" value={profile.gender} onChange={handleChange} />
+          <label htmlFor="dateOfBirth">Date of Birth:</label>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" value={profile.dateOfBirth} onChange={handleChange} />
+          <label htmlFor="joiningDate">Member Since:</label>
+          <input type="date" id="joiningDate" name="joiningDate" value={profile.MemberSince} onChange={handleChange} />
+
+          <label htmlFor="country">Country:</label>
+          <input type="text" id="country" name="country" value={profile.country} onChange={handleChange} />
+          {/* Rest of the form fields */}
+          <br />
+          <button onClick={handleSave}>Save Changes</button>
+        <button onClick={() => setIsEditing(false)}>Cancel Editing</button>        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="user-profile">
-      <div className="profile-header">
-        <img src={profile.photoUrl || 'default-avatar.jpg'} alt="User" className="profile-photo"/>
+     <div className="user-profile">
+     <div className="profile-header">
+     <img src={profile.photoURL} alt="User" className="profile-photo" />
         <div className="user-info">
-          <h2>{profile.username}</h2>
-          <p><strong>Gender:</strong> {profile.gender}</p>
-          <p><strong>Date of Birth:</strong> {formatDate(profile.dateOfBirth)}</p>
-          <p><strong>Country:</strong> {profile.country}</p>
+          <h2>{user.username}</h2>
+          <p><strong>Name: </strong>{user.name}</p>
+          <p><strong>Gender:</strong> {user.gender}</p>
+          <p><strong>Date of Birth:</strong> {user.dateOfBirth}</p>
+          <p><strong>Member Since:</strong> {user.MemberSince}</p>
+          <p><strong>Country:</strong> {user.country}</p>
         </div>
-        </div>
+      </div>
       <div className="ratings">
         <h3>User Ratings</h3>
         <ul>
@@ -50,7 +132,6 @@ const UserProfile = () => {
           ))}
         </ul>
       </div>
-
       <div className="top-picks">
         <h3>Top Picks</h3>
         <ul>
@@ -59,7 +140,6 @@ const UserProfile = () => {
           ))}
         </ul>
       </div>
-
       <div className="reviews">
         <h3>Recent Reviews</h3>
         <ul>
@@ -68,12 +148,10 @@ const UserProfile = () => {
           ))}
         </ul>
       </div>
-
-
-
+      <button onClick={handleEditClick}>Edit Profile</button>
     </div>
-    
   );
+  
 };
 
 export default UserProfile;

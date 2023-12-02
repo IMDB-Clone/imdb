@@ -7,12 +7,19 @@ import PrivacyPolicy from './containers/PrivacyPolicy/PrivacyPolicy';
 import HomePage from './containers/HomePage/HomePage';
 import MovieTrailersPage from './containers/MovieTrailersPage/MovieTrailersPage';
 import MovieReviewing from './containers/MovieReview/MovieReviewing'; 
-
+import LoginSignup from './components/LoginSignup/LoginSignup';
+import ForgotPassword  from './containers/ForgotPassword/ForgotPassword';
+import { UserProvider } from './services/usercontext';
+import UserProfile from './components/UserProfile/UserProfile';
 const App = () => {
     return (
-        <Router>
+        <UserProvider>
+             <Router>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<LoginSignup />} />
+                <Route path="/forgot" element={<ForgotPassword />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/profile" element={<UserProfile />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/movie-trailers/:movieId" element={<MovieTrailersPage />} />
@@ -21,6 +28,8 @@ const App = () => {
                 <Route path="/movie-review/:movieId" element={<MovieReviewing />} />
             </Routes>
         </Router>
+        </UserProvider>
+       
     );
 };
 
