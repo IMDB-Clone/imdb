@@ -1,114 +1,109 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Light grey background */
+}
+
 .user-profile {
-  position: relative; /* Add relative positioning here */
-  max-width: 400px;
-  margin: 40px auto 20px; /* Increase top margin to make space for the photo */
-  padding: 20px;
-  background-color: #fff;
-  color: #0c0c0c;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 50px 0;
 }
 
 .profile-header {
-  position: relative; /* Ensure this is relative if it's the direct parent of the photo */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .profile-photo {
-  max-width: 100px; /* Example width, adjust as needed */
-  max-height: 100px; /* Example height, adjust as needed */
-  border-radius: 50%; /* If you want a circular image */
-  /* Add more styles as needed */
-}
-
-.user-info {
-  flex-grow: 1;
-}
-
-.user-info h2 {
-  margin: 0;
-  color: #0c0c0c;
-  font-size: 24px;
-}
-
-.user-info p {
-  margin: 5px 0;
-  color: #0c0c0c;
-}
-
-.ratings,
-.top-picks,
-.reviews {
-  margin-top: 30px;
-}
-
-h3 {
-  color: #ffc800; 
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  margin-bottom: 10px;
-  color: #0c0c0c; 
-}
-
-.loading-message {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  margin: 50px 0;
-  color: #0c0c0c; 
-}
-
-.user-profile button {
-  background-color: #ffc800; 
-  color: #0c0c0c; 
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: #ccc;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  margin: 10px auto;
 }
 
-.user-profile button.cancel-edit {
-  background-color: #808080;
-  margin-left: 10px;
-}
-
-.user-profile .edit-form {
-  margin: 20px;
-}
-
-.user-profile .edit-form label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.user-profile .edit-form input {
+.profile-photo img {
   width: 100%;
-  padding: 8px;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.user-info, .edit-form {
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.user-info p, .edit-form input, .edit-form label {
   margin-bottom: 15px;
 }
 
-.user-profile .edit-form button {
-  background-color: #ffc800; 
-  color: #0c0c0c; 
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="date"],
+.edit-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.edit-form button {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
   margin-right: 10px;
 }
 
-.user-profile .edit-form button.cancel-edit {
-  background-color: #808080;
-  margin-left: 10px;
+.edit-form .save-changes {
+  background-color: #FFC72C; /* Bright yellow */
+  color: #fff;
+}
+
+.edit-form .cancel-editing {
+  background-color: #d3d3d3; /* Light grey */
+  color: #333;
+}
+
+.edit-form .save-changes:hover {
+  background-color: #e6b800; /* Darker yellow */
+}
+
+.edit-form .cancel-editing:hover {
+  background-color: #c0c0c0; /* Darker grey */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .user-info, .edit-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+  }
 }

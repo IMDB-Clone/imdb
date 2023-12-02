@@ -6,6 +6,8 @@ import "./LoginSignup.css";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../services/firebase";
 import { doc, setDoc, getFirestore, getDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../services/firebase'; 
 import {
   ref as storageRef,
   uploadBytes,
@@ -55,8 +57,9 @@ const LoginSignup = () => {
             <Login />
           )}
           {active === "signup" && (
-            <Signup />
-          )}
+  <Signup setActive={setActive} />
+)}
+          
         </div>
       </div>
     </div>
@@ -106,34 +109,45 @@ const Login = ({ }) => {
   // GOOGLE Log IN
   const handleGoogleLogin = async () => {
     try {
-        const googleUser = await authService.signInWithGoogle();
-        const username = googleUser.displayName || "";
-        const db = getFirestore();
-        const userRef = doc(db, "Users", googleUser.uid);
-
-        await setDoc(
-            userRef,
-            {
-                username: username,
-                email: googleUser.email,
-                MemberSince: new Date(),
-            },
-            { merge: true }
-        );
-
-        updateUser({
-            uid: googleUser.uid,
-            email: googleUser.email,
-            username: username
-        });
-
-        console.log("Google sign-in successful, user:", googleUser);
-        handleTMDBAuthorization();
+      const googleUser = await authService.signInWithGoogle();
+      const db = getFirestore();
+      const userRef = doc(db, "Users", googleUser.uid);
+  
+      // Check if user already exists in Firestore
+      const docSnap = await getDoc(userRef);
+  
+      if (docSnap.exists()) {
+        // User exists, update the data without changing 'MemberSince'
+        await setDoc(userRef, {
+          username: googleUser.displayName || "",
+          email: googleUser.email,
+          photoURL: googleUser.photoURL
+          // other fields if needed
+        }, { merge: true });
+      } else {
+        // User doesn't exist, create new record with 'MemberSince'
+        await setDoc(userRef, {
+          username: googleUser.displayName || "",
+          email: googleUser.email,
+          photoURL: googleUser.photoURL,
+          MemberSince: new Date()
+          // other fields if needed
+        }, { merge: true });
+      }
+  
+      updateUser({
+        uid: googleUser.uid,
+        email: googleUser.email,
+        username: googleUser.displayName || ""
+      });
+  
+      console.log("Google sign-in successful, user:", googleUser);
+      handleTMDBAuthorization();
     } catch (error) {
-        console.error("Error during Google sign-in", error);
+      console.error("Error during Google sign-in", error);
     }
-};
-
+  };
+  
   // FACEBOOK Log In
   const handleFacebookLogin = async () => {
     try {
@@ -190,7 +204,7 @@ const Login = ({ }) => {
           </label>
           <div className="forgot-password">
             <button
-              onClick={() => navigate("/forgotpassword")}
+              onClick={() => navigate("/forgot")}
               className="forgotPasswordButton"
             >
               Forgot Your Password?
@@ -232,7 +246,6 @@ const Signup = ({ setActive }) => {
     confirmPassword: "",
   });
   const [selectedFile, setSelectedFile] = useState(null);
-  const [ setErrorMessage] = useState(""); 
   const { updateUser } = useContext(UserContext);
 
   const handleFileChange = (event) => {
@@ -274,147 +287,76 @@ const Signup = ({ setActive }) => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (signupForm.password !== signupForm.confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      console.log('Passwords do not match');
       return;
     }
-
     try {
-      const userCredential = await authService.signUpWithEmail(
-        signupForm.email,
-        signupForm.password
-      );
+      // Create the user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, signupForm.email, signupForm.password);
       let photoURL = "";
-      if (selectedFile) {
-        const photoPath = `users/${userCredential.user.uid}/${selectedFile.name}`;
-        const photoStorageRef = storageRef(storage, photoPath);
-        const snapshot = await uploadBytes(photoStorageRef, selectedFile);
-        photoURL = await getDownloadURL(snapshot.ref);
+      
+      // Handle the photo upload if a file is selected
+      if(selectedFile){
+        const photoPath=`users/${userCredential.user.uid}/${selectedFile.name}`;
+        const photoStorageRef=storageRef(storage,photoPath);
+        const snapshot=await uploadBytes(photoStorageRef,selectedFile);
+        photoURL=await getDownloadURL(snapshot.ref);
       }
 
-      const userRef = doc(db, "Users", userCredential.user.uid);
-      await setDoc(
-        userRef,
-        {
-          name: signupForm.name,
-          email: signupForm.email,
-          memberSince: new Date(),
-          username: signupForm.username,
-          gender: signupForm.gender,
-          dateOfBirth: signupForm.dateOfBirth,
-          country: signupForm.country,
-          photoURL: photoURL,
-        },
-        { merge: true }
-      );
-
-      updateUser({
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        ...signupForm,
+      // Prepare the user data to be saved
+      const userData = {
+        name: signupForm.name,
+        email: signupForm.email,
+        //MemberSince: signupForm.MemberSince,
+        username: signupForm.username,
+        gender: signupForm.gender,
+        dateOfBirth: signupForm.dateOfBirth,
+        country: signupForm.country,
         photoURL: photoURL,
-      });
+      };
 
-      navigate("/");
+      // Save the user data to Firestore
+      const userRef= doc(db, 'Users', userCredential.user.uid); 
+      await setDoc(userRef, userData, { merge: true });
+
+      // Update the user context or global state if necessary
+      updateUser(userData);
+
+      // Provide feedback and navigate
+      alert('Account created successfully');
+      navigate('/login');
     } catch (error) {
-      setErrorMessage(error.message); // Displaying the error message
+      console.log(error.code, error.message);
+      alert("Account creation failed");
     }
-  };
+};
+
   return (
     <div>
       <form onSubmit={handleSignupSubmit} className="signup-form">
-        <label htmlFor="name">Full Name </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={signupForm.name}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={signupForm.username}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="Gender">Gender</label>
-        <input
-          type="text"
-          id="Gender"
-          name="Gender"
-          value={signupForm.Gender}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="dateOfBirth">Date of Birth</label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          name="dateOfBirth"
-          value={signupForm.dateOfBirth}
-          onChange={handleInputChange}
-          required
-        />
-        {/* <label htmlFor="MemberSince">Member Since</label>
-        <input
-          type="date"
-          id="MemberSince"
-          name="MemberSince"
-          value={signupForm.MemberSince}
-          onChange={handleInputChange}
-          required
-        /> */}
-        <label htmlFor="photo">Upload Photo</label>
-        <input
-          type="file"
-          id="photo"
-          accept="image/*"
-          onChange={handleFileChange}
-        />
+        
+        <label htmlFor="name"> </label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name"value={signupForm.name} onChange={handleInputChange} required />
+        <label htmlFor="username"></label>
+        <input type="text" id="username" name="username"placeholder="Enter your username" value={signupForm.username} onChange={handleInputChange} required />
+        <label htmlFor="gender"></label>
+        <input type="text" id="gender" name="gender" placeholder="gender"value={signupForm.gender} onChange={handleInputChange} required />
+        <label htmlFor='dateOfBirth'>date of birth</label>
+        <input type='date' id='dateOfBirth' name='dateOfBirth'placeholder="Enter your date of birth" value={signupForm.dateOfBirth} onChange={handleInputChange} required />
+        <input type='file' id='photo' accept="image/*" onChange={handleFileChange}  />
         {renderPhoto()}
-        <label htmlFor="country">Country</label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={signupForm.country}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="signupEmail">Email</label>
-        <input
-          type="email"
-          id="signupEmail"
-          name="email"
-          value={signupForm.email}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="signupPassword">Password</label>
-        <input
-          type="password"
-          id="signupPassword"
-          name="password"
-          value={signupForm.password}
-          onChange={handleInputChange}
-          required
-        />
-        <label htmlFor="confirmPassword">Re-enter password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          value={signupForm.confirmPassword}
-          onChange={handleInputChange}
-          required
-        />
+        <label htmlFor='country'></label>
+        <input type='text' id='country' name='country' placeholder="Enter your country" value={signupForm.country} onChange={handleInputChange} required />
+        <label htmlFor="signupEmail"></label>
+        <input type="email" id="signupEmail" name="email"placeholder="Enter your email" value={signupForm.email} onChange={handleInputChange} required />
+        <label htmlFor="signupPassword"></label>
+        <input type="password" id="signupPassword" name="password" placeholder="Enter your password"value={signupForm.password} onChange={handleInputChange} required />
+        <label htmlFor="confirmPassword"></label>
+        <input type="password" id="confirmPassword" name="confirmPassword"  placeholder= " Re-enter you password "value={signupForm.confirmPassword} onChange={handleInputChange} required />
         <button type="submit">Create your IMDB account</button>
-        <button
-          type="button"
-          onClick={() => setActive("login")}
+        <button 
+          type="button" 
+          onClick={() => setActive('login')} 
           className="back-to-login-button"
         >
           Back to Login

@@ -18,7 +18,7 @@ const App = () => {
                 <Routes> {/* Wrap all Route components within Routes */}
                     <Route path="/" element={<LoginSignup />} />
                     <Route path="/tmdb-auth" element={<TMDBRedirectHandler />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/forgot" element={<ForgotPassword />} />
                     <Route path="/user-profile" element={<UserProfile />} />
                     {/* other routes */}
                 </Routes>
