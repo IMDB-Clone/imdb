@@ -10,6 +10,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { UserContext } from "../../services/usercontext";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../Footer/Footer";
+import Ratings from "../Ratings/Ratings";
+import UserReview from "../UserReview/UserReview";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -127,8 +129,6 @@ const UserProfile = () => {
     return (
       <div>
       <NavBar />
-
-
       <div className="user-profile">
         <div className="edit-form">
           <h2>Edit Profile</h2>
@@ -211,11 +211,7 @@ const UserProfile = () => {
       </div>
       <div className="ratings">
         <h3>User Ratings</h3>
-        <ul>
-          {profile.ratings.map((rating, index) => (
-            <li key={index}>Rating: {rating}</li>
-          ))}
-        </ul>
+        <Ratings uid={user.uid}/>
       </div>
       <div className="top-picks">
         <h3>Top Picks</h3>
@@ -227,11 +223,7 @@ const UserProfile = () => {
       </div>
       <div className="reviews">
         <h3>Recent Reviews</h3>
-        <ul>
-          {profile.reviews.map((review, index) => (
-            <li key={index}>{review}</li>
-          ))}
-        </ul>
+        <UserReview uid={user.uid}/>
       </div>
       <button onClick={handleEditClick}>Edit Profile</button>
     </div>

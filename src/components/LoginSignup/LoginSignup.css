@@ -1,10 +1,10 @@
 /* loginsignup */
-.icon {
+.auth-container-loginsignup .icon {
   width: 40px;
   height: auto;
 }
 
-.top-icon {
+.auth-container-loginsignup .top-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@
   z-index: 2;
 }
 
-.auth-container {
+.auth-container-loginsignup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,19 +22,19 @@
   position: relative;
 }
 
-.top-icon img {
+.auth-container-loginsignup .top-icon img {
   max-width: 100px;
   margin-bottom: 10px;
 }
 
-.auth-container h2 {
+.auth-container-loginsignup.auth-container h2 {
   text-align: center;
   color: #0c0c0c;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.auth-card {
+.auth-container-loginsignup .auth-card {
   width: 350px;
   padding: 10px;
   background-color: #fff;
@@ -45,39 +45,39 @@
   z-index: 1;
 }
 
-.card-head {
+.auth-container-loginsignup .card-head {
   display: flex;
   justify-content: space-between;
   margin-bottom: -4px;
   margin-top: 10px;
 }
 
-.card-head h3, .card-head h4 {
+.auth-container-loginsignup .card-head h3, .card-head h4 {
   cursor: pointer;
   padding-bottom: 0px;
   color: #000;
 }
 
-.card-head .active {
+.auth-container-loginsignup .card-head .active {
   border-bottom: 2px solid #000;
 }
 
-.form-section {
+.auth-container-loginsignup .form-section {
   display: flex;
   flex-direction: column;
 }
 
-form {
+.auth-container-loginsignup form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 }
 
-label {
+.auth-container-loginsignup label {
   margin-bottom: 10px;
 }
 
-input {
+.auth-container-loginsignup input {
   margin-bottom: 10px;
   padding: 12px;
   border: 1px solid #ccc;
@@ -85,47 +85,47 @@ input {
   font-size: 14px;
 }
 
-.aux-options {
+.auth-container-loginsignup .aux-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.remember-me {
+.auth-container-loginsignup .remember-me {
   display: flex;
   align-items: center;
   font-weight: bold;
   color: #666;
 }
 
-label[for="email"],
-label[for="password"] {
+.auth-container-loginsignup label[for="email"],
+.auth-container-loginsignup label[for="password"] {
   font-weight: bold;
 }
 
-input#email,
-input#password {
+.auth-container-loginsignup input#email,
+.auth-container-loginsignup input#password {
   border: 1px solid black;
 }
 
-.remember-me input[type="checkbox"] {
+.auth-container-loginsignup .remember-me input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.forgot-password {
+.auth-container-loginsignup .forgot-password {
   cursor: pointer;
   margin-top: 10px;
 }
 
-.forgotPasswordButton {
+.auth-container-loginsignup .forgotPasswordButton {
   background-color: white;
   color: #0071eb;
   border: none;
   padding: 0;
 }
 
-button[type="submit"] {
+.auth-container-loginsignup button[type="submit"] {
   background-color: #FFC72C;
   padding: 12px 24px;
   border: none;
@@ -134,19 +134,19 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-.social-login {
+.auth-container-loginsignup .social-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.social-login p {
+.auth-container-loginsignup .social-login p {
   margin-bottom: 10px;
   color: #000;
 }
 
-.social-login .social-button {
+.auth-container-loginsignup .social-login .social-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,12 +160,12 @@ button[type="submit"] {
   color: #000;
 }
 
-.social-login .social-button img {
+.auth-container-loginsignup .social-login .social-button img {
   width: 20px;
   margin-right: 8px;
 }
 
-.auth-container button {
+.auth-container-loginsignup .auth-container button {
   width: 100%;
   padding: 10px;
   border: none;
@@ -177,7 +177,7 @@ button[type="submit"] {
   margin-top: 10px;
 }
 
-.auth-container button:hover {
+.auth-container-loginsignup  button:hover {
   background-color: #e6b800;
 }
 

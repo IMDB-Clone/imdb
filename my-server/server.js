@@ -77,7 +77,21 @@ async function run() {
       }
     });
 
-    // Other endpoints...
+    app.get('/api/reviews/user/:uid', async (req, res) => {
+      const userUid = req.params.uid;
+    
+      try {
+        const query = { uid: userUid };
+        const userReviews = await reviewsCollection.find(query).toArray();
+        if (userReviews.length === 0) {
+          return res.status(404).send('No reviews found for this user');
+        }
+        res.status(200).json(userReviews);
+      } catch (err) {
+        console.error('Error fetching reviews from the database for user', err);
+        res.status(500).send('Error fetching reviews for user from the database');
+      }
+    });
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

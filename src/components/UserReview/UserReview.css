@@ -1,0 +1,51 @@
+/* UserReview.css */
+.user-reviews {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-reviews h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 16px;
+    cursor: pointer; /* Ensures the cursor changes to pointer on hover */
+}
+
+.user-reviews h3:hover {
+    color: #0275d8; /* Change color on hover */
+}
+
+.user-reviews ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-reviews .review-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.user-reviews .review-item:last-child {
+    border-bottom: none;
+}
+
+.user-reviews .review-item strong {
+    display: block;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.user-reviews .review-item p {
+    color: #666;
+    font-size: 14px;
+}
+
+.user-reviews .review-item:hover {
+    background-color: #f0f0f0;
+}

@@ -27,7 +27,7 @@ import {redirectToTMDBForToken} from "../../services/session"
 const LoginSignup = () => {
   const [active, setActive] = useState("login");
   return (
-    <div className="auth-container">
+    <div className="auth-container-loginsignup">
       <div className="top-icon">
         <img src={IMDB_icon} alt="IMDB" />
       </div>
