@@ -31,7 +31,7 @@ const MovieYearTitleComponent = ({ movieId }) => {
             <div className="movie-info">
                 <h3 className="movie-title">{title}</h3>
                 <span className="movie-year">({releaseYear})</span>
-                <a href="#" className="review-link">Review this title</a>
+                {/* <a href="#" className="review-link">Review this title</a> */}
             </div>
         </div>
     );

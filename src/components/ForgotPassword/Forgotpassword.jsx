@@ -17,7 +17,7 @@ export function Forgot() {
       })
       .catch((error) => {
       
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage); 
       });

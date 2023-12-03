@@ -218,16 +218,13 @@ const handleSignupSubmit = async (e) => {
     await setDoc(userRef, {
       name: signupForm.name,
       email: signupForm.email,
-      MemberSince: new Date(),
+      MemberSince: new Date().toISOString(),
       username: signupForm.username,
       gender: signupForm.Gender,
       dateOfBirth: signupForm.dateOfBirth,
       country: signupForm.country,
       photoURL: photoURL,
     }, { merge: true });
-
-    // Optional: Update User Context or Local Storage here if you're using it
-    // setUser({...});
 
     alert('Account created successfully');
     navigate('/');
