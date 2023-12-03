@@ -46,6 +46,7 @@ const ReviewPopup = ({ isOpen, movie, onClose, Session_ID, uid, author}) => {
 
       if (response.ok) {
         onClose(); // Close the popup on successful submission
+        window.location.reload(); // Reload the page
       } else {
         console.error('Error saving review');
       }

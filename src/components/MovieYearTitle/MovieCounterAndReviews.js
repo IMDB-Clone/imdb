@@ -12,6 +12,7 @@ const MovieCounterAndReviews = ({ movieId }) => {
             try {
                 // Fetching reviews from the external API
                 const externalReviews = await fetchTotalReview(movieId);
+                setReviews(externalReviews); // Displaying external reviews first
 
                 // Fetching reviews from your database
                 const response = await axios.get(`http://localhost:3001/api/reviews/${movieId}`);
@@ -19,8 +20,7 @@ const MovieCounterAndReviews = ({ movieId }) => {
 
                 // Combine both sets of reviews
                 const combinedReviews = [...externalReviews, ...databaseReviews];
-
-                setReviews(combinedReviews);
+                setReviews(combinedReviews); // Updating state with combined reviews
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -35,7 +35,6 @@ const MovieCounterAndReviews = ({ movieId }) => {
             case 'date':
                 return [...reviews].sort((a, b) => new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt));
             case 'rating':
-                // Assuming default rating as 0 if not available
                 return [...reviews].sort((a, b) => {
                     const ratingA = a.author_details?.rating || a.rating || 0;
                     const ratingB = b.author_details?.rating || b.rating || 0;
@@ -49,7 +48,6 @@ const MovieCounterAndReviews = ({ movieId }) => {
     useEffect(() => {
         setReviews(revs => sortReviews(revs, sortType));
     }, [sortType]);
-    console.log(reviews);
 
     return (
         <div className="movie-reviews-container">
@@ -62,22 +60,22 @@ const MovieCounterAndReviews = ({ movieId }) => {
                 </select>
             </div>
             {reviews.map(review => (
-    <div key={review.id} className="review-card">
-        <div className="review-header">
-            <span className="review-rating">★ {review.author_details?.rating ?? review.rating}/10</span>
-            <span className="review-author">{review.author}</span>
-            <span className="review-date">
-              {review.created_at ? new Date(review.created_at).toLocaleDateString() : review.createdAt}
-            </span>
-        </div>
-        <p className="review-content">{review.content}</p>
-        <div className="review-helpful">
-            <button className="helpful-button">Yes</button>
-            <button className="helpful-button">No</button>
-            <span>Helpfulness count</span> {/* Replace with actual data */}
-        </div>
-    </div>
-))}
+                <div key={review.id} className="review-card">
+                    <div className="review-header">
+                        <span className="review-rating">★ {review.author_details?.rating ?? review.rating}/10</span>
+                        <span className="review-author">{review.author}</span>
+                        <span className="review-date">
+                            {review.created_at ? new Date(review.created_at).toLocaleDateString() : new Date(review.createdAt).toLocaleDateString()}
+                        </span>
+                    </div>
+                    <p className="review-content">{review.content}</p>
+                    <div className="review-helpful">
+                        <button className="helpful-button">Yes</button>
+                        <button className="helpful-button">No</button>
+                        <span>Helpfulness count</span> {/* Replace with actual data */}
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
