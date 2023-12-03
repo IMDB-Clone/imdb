@@ -67,7 +67,7 @@ const RecentlyAdded = () => {
             />
           </div>
           <Carousel.Caption className="carousel-custom-caption">
-            <a href={movie.trailer} target="_blank" rel="noopener noreferrer">
+            <a href={`/movie-details/${movie.id}`} target="_blank" rel="noopener noreferrer">
               <img
                 src={isHovered ? playButton2 : playButton1}
                 alt="Play Trailer"

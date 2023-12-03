@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { fetchTopUSMovies, fetchMovieDetails } from '../../services/movieService';
-import watchlistIcon from '../../assets/watchlist.png';
-import watchlistedIcon from '../../assets/watchlisted.png';
-import './TopUS.css';
+import React, { useState, useEffect } from "react";
+import {
+  fetchTopUSMovies,
+  fetchMovieDetails,
+} from "../../services/movieService";
+import "./TopUS.css";
 
 const TopUS = () => {
-    const [movies, setMovies] = useState([]);
-    const [watchlistedMovies, setWatchlistedMovies] = useState(new Set());
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-  
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadMovies = async () => {
       setIsLoading(true);
       try {
         const topMovies = await fetchTopUSMovies();
-        const movieDetailsPromises = topMovies.map((movie) => fetchMovieDetails(movie.id));
+        const movieDetailsPromises = topMovies.map((movie) =>
+          fetchMovieDetails(movie.id)
+        );
         const movieDetails = await Promise.all(movieDetailsPromises);
 
-        let moviesWithRevenue = topMovies.map((movie, index) => {
-          return {
-            ...movie,
-            revenue: movieDetails[index].revenue || 0
-          };
-        });
+        let moviesWithRevenue = topMovies.map((movie, index) => ({
+          ...movie,
+          revenue: movieDetails[index].revenue || 0,
+        }));
 
         moviesWithRevenue.sort((a, b) => b.revenue - a.revenue);
 
-        moviesWithRevenue = moviesWithRevenue.slice(0, 5);
+        moviesWithRevenue = moviesWithRevenue
+          .map((movie, index) => ({
+            ...movie,
+            rank: index + 1, // Add the rank property here
+          }))
+          .slice(0, 5);
 
+        console.log(moviesWithRevenue);
         setMovies(moviesWithRevenue);
       } catch (err) {
         setError(err.message);
@@ -39,18 +44,6 @@ const TopUS = () => {
 
     loadMovies();
   }, []);
-
-  const toggleWatchlist = (movieId) => {
-    setWatchlistedMovies((prevWatchlistedMovies) => {
-      const updatedWatchlistedMovies = new Set(prevWatchlistedMovies);
-      if (updatedWatchlistedMovies.has(movieId)) {
-        updatedWatchlistedMovies.delete(movieId);
-      } else {
-        updatedWatchlistedMovies.add(movieId);
-      }
-      return updatedWatchlistedMovies;
-    });
-  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -67,15 +60,18 @@ const TopUS = () => {
         {movies.map((movie) => (
           <li key={movie.id} className="movie-item">
             <span className="rank">{movie.rank}</span>
-            <button className="watchlist-button" onClick={() => toggleWatchlist(movie.id)}>
-              <img 
-                src={watchlistedMovies.has(movie.id) ? watchlistedIcon : watchlistIcon}
-                alt="Toggle watchlist"
-              />
-            </button>
             <div className="movie-info">
-              <span className="movie-title">{movie.title}</span>
-              <span className="revenue">{`$${(movie.revenue / 1000000).toFixed(1)}M`}</span>
+              <a
+                href={`/movie-details/${movie.id}`}
+                key={movie.id}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <span className="movie-title">{movie.title}</span>
+              </a>
+
+              <span className="revenue">{`$${(movie.revenue / 1000000).toFixed(
+                1
+              )}M`}</span>
             </div>
           </li>
         ))}
