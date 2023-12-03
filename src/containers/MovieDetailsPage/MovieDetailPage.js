@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MovieBanner from "../../components/MovieBanner/MovieBanner";
 import MovieComponent from "../MovieMedia/MovieComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,6 +10,7 @@ import TrailerList from "../../components/TrailerList/TrailerList";
 import "./MovieDetailPage.css";
 import { useParams } from 'react-router-dom';
 import NavBar from "../../components/NavBar/NavBar";
+import { UserContext } from '../../services/usercontext';
 
 const MovieDetailPage = () => {
   const { movieId, Session_ID } = useParams();
@@ -17,6 +18,8 @@ const MovieDetailPage = () => {
   const [featuredTrailer, setFeaturedTrailer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useContext(UserContext);
+  const sessionID = user?.tmdbSessionId;
 
   useEffect(() => {
     const loadData = async () => {
@@ -43,9 +46,10 @@ const MovieDetailPage = () => {
 
   return (
     <div className="movie-section-background">
-      <MovieBanner movieId={movieId} Session_ID={"e96bc3b2f9c8b8a06ca08112e619ab16b872c3f7"} />
-      <MovieComponent movieId={movieId} Session_ID={"e96bc3b2f9c8b8a06ca08112e619ab16b872c3f7"} />
-      <GDMC movieId={movieId} Session_ID={"e96bc3b2f9c8b8a06ca08112e619ab16b872c3f7"} />
+      <NavBar />
+      <MovieBanner movieId={movieId} Session_ID={sessionID} />
+      <MovieComponent movieId={movieId} Session_ID={sessionID} />
+      <GDMC movieId={movieId} Session_ID={sessionID} />
       <TrailerList trailers={trailers.filter(t => t.id !== featuredTrailer?.id)} onTrailerSelect={handleTrailerSelect} />
       <MovieCast movieId={movieId} />
       <Footer />

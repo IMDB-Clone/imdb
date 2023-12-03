@@ -1,10 +1,12 @@
 import React from "react";
 import "./TermsAndConditions.css";
 import Footer from "../../components/Footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 
 const TermsAndConditions = () => {
   return (
     <div className="main">
+      <NavBar />
       <div className="terms">
         <h1>IMDb Conditions of Use</h1>
         <p>

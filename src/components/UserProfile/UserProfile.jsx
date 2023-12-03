@@ -8,6 +8,8 @@ import {
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { UserContext } from "../../services/usercontext";
+import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -78,6 +80,7 @@ const UserProfile = () => {
         ...prevProfile,
         photoURL: photoURL
       }));
+      console.log("uploaded photo: "+ photoURL)
     } catch (error) {
       console.error("Error uploading photo:", error);
     }
@@ -95,8 +98,10 @@ const UserProfile = () => {
     try {
       const updatedProfile = {};
       for (const key in profile) {
+        console.log(updatedProfile[key] + " "+ profile[key])
         if (profile[key] !== user[key] && profile[key] !== "") {
           updatedProfile[key] = profile[key];
+
         }
       }
 
@@ -115,11 +120,15 @@ const UserProfile = () => {
     } catch (error) {
       console.error("Error updating profile:", error);
       setIsEditing(false);
-    }
+    } 
   };
 
   if (isEditing) {
     return (
+      <div>
+      <NavBar />
+
+
       <div className="user-profile">
         <div className="edit-form">
           <h2>Edit Profile</h2>
@@ -168,10 +177,15 @@ const UserProfile = () => {
           </button>{" "}
         </div>
       </div>
+      <Footer />  
+      </div>
     );
   }
 
   return (
+    <div>
+
+    <NavBar />
     <div className="user-profile">
       <div className="profile-header">
         <img src={user.photoURL} alt="User" className="profile-photo" />
@@ -220,6 +234,8 @@ const UserProfile = () => {
         </ul>
       </div>
       <button onClick={handleEditClick}>Edit Profile</button>
+    </div>
+    <Footer />   
     </div>
   );
 };

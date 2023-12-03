@@ -1,10 +1,12 @@
 import React from "react";
 import "./PrivacyPolicy.css";
 import Footer from "../../components/Footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 
 const PrivacyPolicy = () => {
   return (
     <div className="privacy-policy">
+      <NavBar />
       <div className="terms">
         <h1>IMDb Privacy Notice</h1>
         <section>
