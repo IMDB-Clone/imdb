@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./ReviewPopup.css"; // Ensure this CSS file exists for styling
+import "./ReviewPopup.css";
 
-const ReviewPopup = ({ isOpen, movie, onClose, Session_ID }) => {
+const ReviewPopup = ({ isOpen, movie, onClose, Session_ID, uid, author}) => {
   const [reviewData, setReviewData] = useState({
-    author: 'You',
     headline: '',
     content: '',
     rating: 0,
     spoiler: false,
     termsAgreed: false,
-    createdAt: new Date().toISOString(),
+    createdAt: new Date().toISOString()
   });
 
   // Handle changes in form inputs
@@ -28,9 +27,11 @@ const ReviewPopup = ({ isOpen, movie, onClose, Session_ID }) => {
 
     // Construct the review object with current date
     const review = {
+      author: author,
       ...reviewData,
       movieId: movie.id,
       sessionId: Session_ID,
+      uid: uid
     };
 
     // Send the review to the server
@@ -61,7 +62,7 @@ const ReviewPopup = ({ isOpen, movie, onClose, Session_ID }) => {
         <button className="close align-self-end btn btn-sm btn-light" onClick={onClose}>×</button>
         <div className="px-4">
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="img-fluid" />
-          <h5 className="movie-info">{movie.title} (2000)</h5>
+          <h5 className="movie-info">{movie.title} ({movie?.release_date ? new Date(movie.release_date).getFullYear() : ''})</h5>
           <div className="star-rating">
             {[...Array(10)].map((_, i) => (
               <React.Fragment key={i}>

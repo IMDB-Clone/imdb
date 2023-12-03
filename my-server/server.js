@@ -29,7 +29,7 @@ async function run() {
     const reviewsCollection = db.collection("Reviews");
 
     app.post('/api/save-review', async (req, res) => {
-      const { author, content, headline, movieId, rating, sessionId, spoiler, termsAgreed, createdAt } = req.body;
+      const { author, content, headline, movieId, rating, sessionId, spoiler, termsAgreed, createdAt, uid } = req.body;
     
       // Construct the review object
       const review = {
@@ -41,11 +41,12 @@ async function run() {
         sessionId,
         spoiler,
         termsAgreed,
-        createdAt  // Including createdAt in the review object
+        createdAt,
+        uid
       };
     
       try {
-        const query = { sessionId: review.sessionId }; // Assuming sessionId is unique for each review
+        const query = { uid: review.uid, movieId: review.movieId };
         const update = { $set: review };
         const options = { upsert: true };
         await reviewsCollection.updateOne(query, update, options);

@@ -3,7 +3,7 @@ import { fetchMovieDetails } from '../../services/DetailService';
 import ReviewPopup from '../ReviewPopup/ReviewPopup'; // Import ReviewPopup and ensure the path is correct
 import './MovieYearTitleComponent.css'; // Make sure to create and use the correct CSS file
 
-const MovieYearTitleComponent = ({ movieId, Session_ID }) => {
+const MovieYearTitleComponent = ({ movieId, Session_ID, author, uid }) => {
     const [movie, setMovie] = useState(null);
     const [showReviewPopup, setShowReviewPopup] = useState(false);
 
@@ -36,7 +36,7 @@ const MovieYearTitleComponent = ({ movieId, Session_ID }) => {
                     Review this title
                 </button>
             </div>
-            {showReviewPopup && <ReviewPopup isOpen={showReviewPopup} movie={movie} onClose={togglePopup} Session_ID={Session_ID} />}
+            {showReviewPopup && <ReviewPopup isOpen={showReviewPopup} movie={movie} onClose={togglePopup} Session_ID={Session_ID} author={author} uid={uid} />}
         </div>
     );
 };
