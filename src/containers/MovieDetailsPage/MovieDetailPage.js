@@ -9,8 +9,10 @@ import { fetchTrailers1 } from "../../services/DetailService";
 import TrailerList from "../../components/TrailerList/TrailerList";
 import "./MovieDetailPage.css";
 import { useParams } from 'react-router-dom';
+import NavBar from "../../components/NavBar/NavBar";
 
 const MovieDetailPage = () => {
+<<<<<<< HEAD
   const { movieId, Session_ID } = useParams();
   const [trailers, setTrailers] = useState([]);
   const [featuredTrailer, setFeaturedTrailer] = useState(null);
@@ -49,6 +51,21 @@ const MovieDetailPage = () => {
       <MovieCast movieId={movieId} />
       <Footer />
     </div>
+=======
+  const { movieId } = useParams();
+
+  return (
+    <>
+      <NavBar />
+      <div className="movie-section-background">
+        <MovieBanner movieId={movieId} />
+        <MovieComponent movieId={movieId} />
+        <GDMC movieId={movieId} />
+        <MovieCast movieId={movieId} />
+        <Footer />
+      </div>
+    </>
+>>>>>>> updatedlogin
   );
 };
 

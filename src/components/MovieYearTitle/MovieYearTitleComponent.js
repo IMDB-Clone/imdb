@@ -3,7 +3,7 @@ import { fetchMovieDetails } from '../../services/DetailService';
 import ReviewPopup from '../ReviewPopup/ReviewPopup'; // Import ReviewPopup and ensure the path is correct
 import './MovieYearTitleComponent.css'; // Make sure to create and use the correct CSS file
 
-const MovieYearTitleComponent = ({ movieId ,Session_ID}) => {
+const MovieYearTitleComponent = ({ movieId, Session_ID }) => {
     const [movie, setMovie] = useState(null);
     const [showReviewPopup, setShowReviewPopup] = useState(false);
 
@@ -32,11 +32,13 @@ const MovieYearTitleComponent = ({ movieId ,Session_ID}) => {
             <div className="movie-info">
                 <h3 className="movie-title">{movie?.title}</h3>
                 <span className="movie-year">({movie?.release_date ? new Date(movie.release_date).getFullYear() : ''})</span>
-                <button className="review-link" onClick={togglePopup}>Review this title</button> {/* Use button instead of a for accessibility */}
+                <button className="review-link" onClick={togglePopup}>
+                    Review this title
+                </button>
             </div>
-            {showReviewPopup && <ReviewPopup isOpen={showReviewPopup} movie={movie} onClose={togglePopup}  Session_ID={Session_ID}/>}
+            {showReviewPopup && <ReviewPopup isOpen={showReviewPopup} movie={movie} onClose={togglePopup} Session_ID={Session_ID} />}
         </div>
     );
-}
+};
 
 export default MovieYearTitleComponent;
