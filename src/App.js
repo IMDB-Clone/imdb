@@ -11,7 +11,8 @@ import LoginSignup from './components/LoginSignup/LoginSignup';
 import ForgotPassword  from './containers/ForgotPassword/ForgotPassword';
 import { UserProvider } from './services/usercontext';
 import UserProfile from './components/UserProfile/UserProfile';
-import NavBar from './components/NavBar/NavBar';
+import TMDBRedirectHandler from './components/TMDBRedirectHandler/TMDBRedirectHandler';
+
 const App = () => {
     return (
         <UserProvider>
@@ -19,6 +20,7 @@ const App = () => {
              <Router>
             <Routes>
                 <Route path="/" element={<LoginSignup />} />
+                <Route path="/tmdb-redirect" element={<TMDBRedirectHandler />} />
                 <Route path="/forgot" element={<ForgotPassword />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<UserProfile />} />

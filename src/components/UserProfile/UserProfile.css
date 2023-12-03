@@ -24,24 +24,29 @@
 }
 
 .user-info {
-  text-align: center;
+  text-align: left; /* Align text to the left */
   margin-bottom: 2rem;
+  padding: 0 1rem; /* Add padding for alignment */
 }
 
 .user-info h2 {
-  font-size: 2.5rem;
+  font-size: 2rem; /* Adjusted font size */
   color: #333;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem; /* Increased bottom margin */
 }
 
 .user-info p {
   color: #555;
   font-size: 1rem;
   margin: 0.25rem 0;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items in the center vertically */
 }
 
 .user-info p strong {
   color: #333;
+  min-width: 120px; /* Set minimum width for labels */
+  margin-right: 10px; /* Space between label and value */
 }
 
 .ratings, .top-picks, .reviews {

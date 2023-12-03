@@ -23,14 +23,16 @@ const UserProfile = () => {
     topPicks: [],
     reviews: [],
     email: "",
-    photoURL: null,
+    photoURL: "",
+    tmdbsessionID: ""
   });
 
   useEffect(() => {
     if (user && user.uid) {
+      console.log(user.tmdbSessionId)
       const fetchData = async () => {
         const db = getFirestore();
-        const docRef = doc(db, "users", user.uid);
+        const docRef = doc(db, "Users", user.uid);
         try {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
@@ -48,7 +50,7 @@ const UserProfile = () => {
       };
       fetchData();
     }
-  }, [user.uid]);
+  }, [user.uid, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,7 +66,10 @@ const UserProfile = () => {
 
     const storage = getStorage();
     const uid = user.uid; // Ensure the uid is available
+    console.log(user.uid);
+    
     const storageRef = ref(storage, `users/${uid}/${file.name}`);
+    console.log(storageRef);
 
     try {
       await uploadBytes(storageRef, file);
