@@ -5,13 +5,12 @@ import "./MovieReviewing.css"; // Ensure you have this CSS file
 import { useParams } from 'react-router-dom';
 
 const MovieReviewing = () => {
-
-  const { movieId } = useParams();
-
+  const { movieId, Session_ID } = useParams();
   return (
     <div className="movie-reviewing">
-      <MovieYearTitleComponent movieId={movieId} />
+      <MovieYearTitleComponent movieId={movieId} Session_ID={"e96bc3b2f9c8b8a06ca08112e619ab16b872c3f7"} />
       <MovieCounterAndReviews movieId={movieId} />
+
     </div>
     
   );

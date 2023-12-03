@@ -47,4 +47,12 @@
 
   }
  
- 
+  .movie-ratings-row{
+    display: none;
+  }
+  @media screen and (max-width: 760px) {
+    .movie-ratings-row{
+      display: block;
+    }
+    
+  }

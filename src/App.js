@@ -16,9 +16,10 @@ const App = () => {
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/movie-trailers/:movieId" element={<MovieTrailersPage />} />
-                <Route path="/movie-details/:movieId" element={<MovieDetailPage/>} />
                 <Route path="/actor/:actorId" element={<ActorDetails />} />
-                <Route path="/movie-review/:movieId" element={<MovieReviewing />} />
+                <Route path="/movie-details/:movieId" element={<MovieDetailPage />} />
+                <Route path="/movie-reviewing/:movieId" element={<MovieReviewing />} />    
+        
             </Routes>
         </Router>
     );

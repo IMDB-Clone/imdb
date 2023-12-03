@@ -4,7 +4,7 @@ import './MovieBanner.css';
 import MovieDetails from './MovieDetails';
 import MovieRatings from './MovieRatings';
 
-const MovieBanner = ({movieId}) => {
+const MovieBanner = ({movieId , Session_ID}) => {
   
 
   const [movie, setMovie] = useState({
@@ -37,7 +37,7 @@ const MovieBanner = ({movieId}) => {
       <div className="container movie-banner-container">
         {/* Love you Saeed */}
         <MovieDetails movie={movie} />
-        <MovieRatings movie={movie} movieId={movieId} />
+        <MovieRatings movie={movie} movieId={movieId} Session_ID={Session_ID} />
       </div>
     </div>
   );

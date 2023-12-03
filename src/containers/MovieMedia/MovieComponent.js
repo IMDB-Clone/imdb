@@ -1,12 +1,12 @@
 // MovieComponent.js
 
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PosterComponent from './PosterComponent';
 import TrailerComponent from './TrailerComponent';
 import { fetchMovieDetails, fetchMovieTrailers } from '../../services/DetailService'; // Adjust the path as necessary
 import './MovieComponent.css';
 
-const MovieComponent = ({ movieId }) => {
+const MovieComponent = ({ movieId , Session_ID }) => {
   const [posterPath, setPosterPath] = useState('');
   const [videoKey, setVideoKey] = useState('');
 
@@ -24,13 +24,13 @@ const MovieComponent = ({ movieId }) => {
     };
 
     fetchData();
-  }, [movieId]);
+  }, [movieId,Session_ID]);
   
   return (
     <div className="container-fluid p-0">
       <div className="row g-0">
         <div className="col-lg-3 col-md-6">
-          {posterPath && <PosterComponent posterPath={posterPath} movieId={movieId}/>}
+          {posterPath && <PosterComponent posterPath={posterPath} movieId={movieId} Session_ID={Session_ID}/>}
         </div>
         <div className="col-lg-8 col-md-6">
           {videoKey && <TrailerComponent videoKey={videoKey} />}

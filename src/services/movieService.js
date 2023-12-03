@@ -1,5 +1,5 @@
 const API_BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = process.env.REACT_APP_TMDB_AUTH_KEY;
+const API_KEY = process.env.REACT_APP_ACCESS_TOKEN;
 
 const fetchOptions = {
   headers: {

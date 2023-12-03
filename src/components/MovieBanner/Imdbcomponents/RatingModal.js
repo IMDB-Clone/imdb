@@ -7,7 +7,7 @@ import {
 import "./RatingModal.css";
 import RatingButton from "./RatingButton";
 
-const RatingModal = ({ movieTitle, movieId }) => {
+const RatingModal = ({ movieTitle, movieId, Session_ID }) => {
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [hasRated, setHasRated] = useState(false);
@@ -16,7 +16,7 @@ const RatingModal = ({ movieTitle, movieId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchRatingStatus(movieId);
+        const data = await fetchRatingStatus(movieId, Session_ID);
         if (data.rated && data.rated.value) {
           setRating(data.rated.value);
           setHasRated(true);
@@ -26,12 +26,12 @@ const RatingModal = ({ movieTitle, movieId }) => {
       }
     };
     fetchData();
-  }, [movieId]);
+  }, [movieId, Session_ID]);
 
   const handleRating = async (rate) => {
     setIsLoading(true);
     try {
-      await updateRating(movieId, rate);
+      await updateRating(movieId, rate , Session_ID);
       setRating(rate);
       setHasRated(true);
     } catch (error) {
@@ -57,7 +57,7 @@ const RatingModal = ({ movieTitle, movieId }) => {
   const handleRemoveRating = async () => {
     setIsLoading(true);
     try {
-      await removeRating(movieId);
+      await removeRating(movieId , Session_ID);
       setRating(0);
       setHasRated(false);
       console.log("Rating removed");
@@ -87,7 +87,7 @@ const RatingModal = ({ movieTitle, movieId }) => {
             </button>
             <h3>Rate This</h3>
             <p>{movieTitle}</p>
-            <div className="star-rating">
+            <div className="star-rating1">
               {[...Array(10)].map((_, index) => (
                 <span
                   key={index}

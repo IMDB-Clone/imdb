@@ -29,15 +29,22 @@
     margin-bottom: 10px;
 }
 
-.movie-card-review .review-link {
-    font-size: 16px; /* Adjust as needed */
-    color: #007bff;
-    text-decoration: none;
-    cursor: pointer;
+.review-link {
+    background-color: #666; /* Primary color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Top and Bottom, Left and Right padding */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Text size */
+    cursor: pointer; /* Cursor style when hovering over the button */
+    text-decoration: none; /* No underline */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.movie-card-review .review-link:hover {
-    text-decoration: underline;
+.review-link:hover {
+    background-color:gold; /* Darker shade for hover state */
+    color: #fff; /* Text color for hover state */
 }
+
 
 /* Add additional styling and responsive adjustments as needed */

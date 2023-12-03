@@ -15,6 +15,7 @@
   .review-popup-container .review-popup {
     width: 100%; 
     border-radius: 10px;
+    overflow: auto; /* Allow scrolling if the content is too long */
   }
   
   .review-popup-container .close {
@@ -131,4 +132,8 @@ padding:0px;
 .review-popup-container .submit-btn:hover{
     background-color: lightgray !important;
     border-color: white !important;
+}
+.mt-3{
+    margin-top: 0px !important;
+
 }

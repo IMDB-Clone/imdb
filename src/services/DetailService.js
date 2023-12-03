@@ -1,9 +1,9 @@
 // DetaileService.js
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
-// const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
-const BEARER_TOKEN = process.env.REACT_APP_TMDB_AUTH_KEY; // Replace with actual token
-
+const API_KEY = process.env.REACT_APP_API_KEY; // Make sure this is correctly set in your .env file
+const BEARER_TOKEN = process.env.REACT_APP_ACCESS_TOKEN; // Replace with actual token
+const  Account_id = process.env.REACT_APP_ACCOUNT_ID; // Replace with actual token
 const fetchOptions = {
   method: 'GET',
   headers: {
@@ -49,10 +49,16 @@ export const fetchMovieTrailers = async (movieId) => {
 // DetailService.js
 
 // ... (other imports and constants)
-
-export const fetchWatchlistStatus = async (movieId) => {
+export const fetchWatchlistStatus = async (movieId, Session_ID) => { ////////////////////////////////////////////////////here i should add session id 
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/account_states`, fetchOptions);
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/account_states?session_id=${Session_ID}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+      }
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -66,9 +72,12 @@ export const fetchWatchlistStatus = async (movieId) => {
   }
 };
 
-export const updateWatchlist = async (movieId, newWatchlistStatus) => {
+export const updateWatchlist = async ( movieId, newWatchlistStatus,Session_ID) => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/account/20709913/watchlist`, {
+    // Construct the URL with dynamic accountId and sessionId
+    const url = `https://api.themoviedb.org/3/account/${Account_id}/watchlist?session_id=${Session_ID}`;
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -93,6 +102,8 @@ export const updateWatchlist = async (movieId, newWatchlistStatus) => {
     throw error;
   }
 };
+
+
 // DetailService.js
 
 // ... (other imports and constants)
@@ -194,14 +205,21 @@ export const fetchTotalReviews = async (movieId) => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-export const fetchRatingStatus = async (movieId) => {
+export const fetchRatingStatus = async (movieId, Session_ID) => { /// session id 
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    }
+  };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?`, fetchOptions);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/account_states?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
 
-export const updateRating = async (movieId, rating) => {
+export const updateRating = async (movieId, rating , Session_ID) => {///////////////////////////////////////////// session id
   const options = {
     method: 'POST',
     headers: {
@@ -212,12 +230,12 @@ export const updateRating = async (movieId, rating) => {
     body: JSON.stringify({ value: rating })
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
 
-export const removeRating = async (movieId) => {
+export const removeRating = async (movieId , Session_ID) => {/////////////////////////////////// session id 
   const options = {
     method: 'DELETE',
     headers: {
@@ -226,7 +244,7 @@ export const removeRating = async (movieId) => {
     }
   };
 
-  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating`, options);
+  const response = await fetch(`${API_BASE_URL}/movie/${movieId}/rating?api_key=${API_KEY}&session_id=${Session_ID}`, options);
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   return await response.json();
 };
@@ -321,3 +339,38 @@ export const fetchActorMovies = async (actorId) => {
     throw error; // Re-throw to handle it in the calling function
   }
 };
+export const fetchTrailers1 = async (movieId) => {
+  const url = `${API_BASE_URL}/movie/${movieId}/videos?language=en-US`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      ...fetchOptions,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const movieTrailers = await response.json();
+    console.log(movieTrailers);
+    return movieTrailers;
+  } catch (error) {
+    console.error("Error fetching movie trailers:", error);
+    throw error;
+  }
+};
+export const fetchReviewsFromDatabase = async (movieId) => {
+  const serverUrl = 'http://localhost:3001'; // Use your server's URL here
+  try {
+    const response = await fetch(`${serverUrl}/api/reviews/${movieId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    const reviews = await response.json(); // Parse the response as JSON directly
+    return reviews;
+  } catch (error) {
+    console.error('Failed to fetch reviews: ' + error.message);
+    throw error; // Re-throw to handle it in the calling component
+  }
+};
+
