@@ -11,9 +11,11 @@ import LoginSignup from './components/LoginSignup/LoginSignup';
 import ForgotPassword  from './containers/ForgotPassword/ForgotPassword';
 import { UserProvider } from './services/usercontext';
 import UserProfile from './components/UserProfile/UserProfile';
+import NavBar from './components/NavBar/NavBar';
 const App = () => {
     return (
         <UserProvider>
+            
              <Router>
             <Routes>
                 <Route path="/" element={<LoginSignup />} />

@@ -9,7 +9,7 @@ import MovieInfo from '../../components/MovieInfo/MovieInfo';
 import './MovieTrailersPage.css'
 import Footer from '../../components/Footer/Footer';
 import ShareComponent from '../../components/ShareComponent/ShareComponent'
-
+import NavBar from '../../components/NavBar/NavBar';
 const MovieTrailersPage = () => {
   const { movieId } = useParams();
   const [trailers, setTrailers] = useState([]);
@@ -44,6 +44,8 @@ const MovieTrailersPage = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
+    <>
+    <NavBar />
     <div className="movie-trailers-page pt-4">
       <div className="p-5">
       <ShareComponent />
@@ -63,6 +65,8 @@ const MovieTrailersPage = () => {
       </div>
       <Footer/ >
     </div>
+    </>
+    
   );
 };
 

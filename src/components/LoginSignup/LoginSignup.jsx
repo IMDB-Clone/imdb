@@ -20,8 +20,8 @@ const LoginSignup = () => {
       </div>
       <div className="auth-card">
         <div className="card-head">
-          <h3 className={active === 'login' ? "active" : ""} onClick={() => setActive('login')}>Sign in</h3>
-          <h4 className={active === 'signup' ? "active" : ""} onClick={() => setActive('signup')}>Create your IMDb account</h4>
+          <h3 className={active === 'login' ? "active" : ""} onClick={() => setActive('login')}>Sign In</h3>
+          <h4 className={active === 'signup' ? "active" : ""} onClick={() => setActive('signup')}><strong>Sign Up</strong></h4>
         </div>
         <div className="form-section">
           {active === 'login' && <Login setActive={setActive} />}

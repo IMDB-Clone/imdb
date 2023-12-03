@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #2a2f36;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+    /* Adjust the margins as needed */
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.navbar button {
+    background-color: #ffc800; /* Changed button color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #e6b800; /* Slightly darker shade for hover */
+}
+
+.navbar button:focus {
+    outline: none;
+}

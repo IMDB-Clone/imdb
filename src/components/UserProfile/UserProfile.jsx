@@ -169,7 +169,7 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <div className="profile-header">
-        <img src={profile.photoURL} alt="User" className="profile-photo" />
+        <img src={user.photoURL} alt="User" className="profile-photo" />
         <div className="user-info">
           <h2>{user.username}</h2>
           <p>
