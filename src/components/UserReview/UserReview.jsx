@@ -49,7 +49,7 @@ const UserReview = ({ uid }) => {
           {reviewsWithDetails.map((review, index) => (
             <li key={index} className="review-item">
               <strong>{review.movieDetails?.title} ({review.movieDetails?.release_date}):</strong>
-              <p><em>Rating:</em> {review.rating} / 5</p>
+              <p><em>Rating:</em> {review.rating} / 10</p>
               <p><em>Headline:</em> {review.headline}</p>
               <p><em>Content:</em> {review.content}</p>
             </li>

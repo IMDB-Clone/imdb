@@ -21,7 +21,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<LoginSignup />} />
                 <Route path="/tmdb-redirect" element={<TMDBRedirectHandler />} />
-                <Route path="/forgot" element={<ForgotPassword />} />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
